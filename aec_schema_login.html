@@ -1,0 +1,3102 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="turbo-prefetch" content="true">
+    <meta name="csrf-token" content="qOlciVmrPkHyYuwtV7NGXCZoCK2uqmRIGIC8xvjC">
+    <title>My Course — FullStack Developer dengan Rust dan React</title>
+    <link rel="shortcut icon" href="https://santrikoding.com/images/favicon.ico" />
+    <link rel="preload" as="style" href="https://santrikoding.com/build/assets/app-BDHjLtC9.css" /><link rel="stylesheet" href="https://santrikoding.com/build/assets/app-BDHjLtC9.css" />    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="modulepreload" as="script" href="https://santrikoding.com/build/assets/app-CxbR-i0O.js" /><script type="module" src="https://santrikoding.com/build/assets/app-CxbR-i0O.js"></script>    <link rel="preload" href="https://fonts.googleapis.com/css?family=Quicksand:400,500,600,700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand:400,500,600,700&display=swap">
+    </noscript>
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+        <script>
+        let gaLoaded = false;
+
+        function loadGA() {
+            if (gaLoaded) return;
+            gaLoaded = true;
+
+            // load gtag.js
+            const script = document.createElement('script');
+            script.src = 'https://www.googletagmanager.com/gtag/js?id=G-WN1C1Q2H5X';
+            script.async = true;
+            document.head.appendChild(script);
+
+            // init GA
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            window.gtag = gtag;
+
+            gtag('js', new Date());
+            gtag('config', 'G-WN1C1Q2H5X');
+        }
+
+        window.addEventListener('scroll', loadGA, { once: true });
+        window.addEventListener('mousemove', loadGA, { once: true });
+        window.addEventListener('touchstart', loadGA, { once: true });
+    </script>
+    </head>
+
+<body class="bg-white dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100"
+    x-data="SantriKodingApp()" x-init="init()">
+
+    <!-- Header Utama -->
+<header class="fixed top-0 left-0 right-0 bg-white dark:bg-neutral-950 border-b border-neutral-200 dark:border-neutral-700/80 z-40">
+    <div class="flex items-center justify-between px-4 py-3">
+        <div class="flex items-center gap-3">
+            <div class="flex items-center gap-2" x-data="{ showTooltip: false }">
+                <div class="flex items-center justify-center">
+                    <a href="https://santrikoding.com/account/my-courses" 
+                    @mouseenter="showTooltip = true" 
+                    @mouseleave="showTooltip = false"
+                    class="relative">
+                        <img x-show="$store.theme.isDark === false" src="https://santrikoding.com/images/logo/logo-black.webp" width="170" alt="Santri Koding"/>
+                        <img x-show="$store.theme.isDark" src="https://santrikoding.com/images/logo/logo-white.webp" width="170" alt="Santri Koding"/>
+                        
+                        <!-- Tooltip di kanan -->
+                        <div x-show="showTooltip" 
+                            x-cloak
+                            x-transition
+                            class="absolute z-10 px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm dark:bg-gray-700 left-full top-1/2 transform -translate-y-1/2 ml-3 whitespace-nowrap">
+                            Kembali ke My Courses
+                            <!-- Tooltip arrow kiri -->
+                            <div class="absolute w-2 h-2 bg-gray-900 dark:bg-gray-700 transform rotate-45 -left-1 top-1/2 -translate-y-1/2"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+            <!-- Search Button -->
+            <button x-data @click="$dispatch('open-search-modules')" class="p-2 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-lg transition-colors" title="Search documentation">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+            </button>
+
+            <!-- Version Dropdown - TINGKATKAN Z-INDEX -->
+            <div class="relative" x-data="{ versionOpen: false }" @click.outside="versionOpen = false">
+                <button @click="versionOpen = !versionOpen" class="flex items-center gap-1.5 px-6 py-1.5 text-sm text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-lg border border-neutral-200 dark:border-neutral-600 transition-colors min-w-[80px] justify-between" :class="versionOpen ? 'bg-neutral-100 dark:bg-neutral-700' : ''">
+                    <span class="font-medium">1.1.0</span>
+                    <svg class="w-4 h-4 transition-transform duration-200" :class="versionOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+
+                <!-- Dropdown Menu - TINGKATKAN Z-INDEX LEBIH TINGGI -->
+                <div x-cloak x-show="versionOpen" x-transition class="absolute right-0 mt-2 w-32 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-lg shadow-lg py-1 z-60" style="z-index: 9999;">
+                                            <a href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react?version=1.1.0" @click="versionOpen = false" class="w-full text-left px-3 py-2 text-sm text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors flex items-center justify-between">
+                            <span>1.x - 1.1.0</span>
+                                                            <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                                    </a>
+                                    </div>
+            </div>
+
+            <!-- TOC Toggle Button -->
+            <button 
+                @click="tocVisible = !tocVisible" 
+                class="hidden md:block relative flex w-9 h-9 items-center justify-center rounded-xl text-neutral-600 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition duration-200 p-2"
+                :class="tocVisible ? 'text-primary bg-neutral-100 dark:bg-neutral-700' : ''" 
+                :title="tocVisible ? 'Hide table of contents' : 'Show table of contents'"
+                x-tooltip="tocVisible ? 'Hide TOC' : 'Show TOC'"
+                aria-label="Toggle table of contents"
+                :aria-pressed="tocVisible ? 'true' : 'false'"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-table-options " style="">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 21h-7a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v7" />
+    <path d="M3 10h18" />
+    <path d="M10 3v18" />
+    <path d="M19.001 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+    <path d="M19.001 15.5v1.5" />
+    <path d="M19.001 21v1.5" />
+    <path d="M22.032 17.25l-1.299 .75" />
+    <path d="M17.27 20l-1.3 .75" />
+    <path d="M15.97 17.25l1.3 .75" />
+    <path d="M20.733 20l1.3 .75" /></svg>
+                <span class="sr-only" x-text="tocVisible ? 'Table of contents visible' : 'Table of contents hidden'"></span>
+            </button>
+
+
+            <!-- Dark Mode Toggle -->
+            <div class="relative inline-block">
+                <button 
+                    type="button"
+                    @click="$store.theme && typeof $store.theme.toggle === 'function' ? $store.theme.toggle() : (darkMode = !darkMode)"
+                    class="relative flex w-9 h-9 items-center justify-center rounded-xl bg-white dark:bg-neutral-700 dark:text-neutral-200 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition duration-200 p-2"
+                    :aria-pressed="$store.theme ? ($store.theme.isDark ? 'true' : 'false') : (darkMode ? 'true' : 'false')"
+                    :title="$store.theme ? ($store.theme.isDark ? 'Switch to light mode' : 'Switch to dark mode') : (darkMode ? 'Switch to light mode' : 'Switch to dark mode')"
+                    aria-label="Toggle theme"
+                >
+                    <template x-if="$store.theme ? !$store.theme.isDark : !darkMode">
+                    <span class="inline-flex items-center" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-sun text-neutral-700" style=""><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7" /></svg>                    </span>
+                    </template>
+
+                    <template x-if="$store.theme ? $store.theme.isDark : darkMode">
+                    <span class="inline-flex items-center" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-moon-stars text-yellow-400" style=""><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" /><path d="M17 4a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2" /><path d="M19 11h2m-1 -1v2" /></svg>                    </span>
+                    </template>
+
+                    <span class="sr-only" x-text="$store.theme ? ($store.theme.isDark ? 'Dark mode enabled' : 'Light mode enabled') : (darkMode ? 'Dark mode enabled' : 'Light mode enabled')"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Mobile Header dengan 2 Hamburger - TURUNKAN Z-INDEX -->
+<div class="lg:hidden fixed top-15 left-0 right-0 z-30 bg-white dark:bg-neutral-800 border-b border-t border-neutral-200 dark:border-neutral-700">
+    <div class="flex items-center justify-between sm:px-8 px-4 py-1">
+        <!-- Hamburger Kiri - Sidebar Toggle -->
+        <button @click="sidebarOpen = !sidebarOpen" class="inline-flex items-center gap-2 text-sm font-medium text-neutral-700 dark:text-neutral-200 transition-colors py-2 px-3 rounded-md hover:bg-neutral-100 dark:hover:bg-neutral-700" :class="sidebarOpen ? 'bg-neutral-100 dark:bg-neutral-700 text-primary' : ''" aria-label="Toggle sidebar navigation">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <span class="font-medium text-sm">Menu</span>
+        </button>
+
+        <!-- Hamburger Kanan - TOC Toggle -->
+        <button @click="mobileTocOpen = !mobileTocOpen" class="inline-flex items-center gap-2 text-sm font-medium text-neutral-700 dark:text-neutral-200 transition-colors py-2 px-3 rounded-md hover:bg-neutral-100 dark:hover:bg-neutral-700" :class="mobileTocOpen ? 'bg-neutral-100 dark:bg-neutral-700 text-primary' : ''" aria-label="Toggle table of contents">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-menu-3 w-4 h-4"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 6h10" /><path d="M4 12h16" /><path d="M7 12h13" /><path d="M4 18h10" /></svg>
+            <span class="font-medium text-sm">Table of Contents</span>
+            
+        </button>
+    </div>
+</div>
+
+
+    <!-- Main Container -->
+    <div class="flex pt-16">
+
+        <aside 
+    x-cloak 
+    x-data
+    :class="{
+        '-translate-x-full': !sidebarOpen,
+        'translate-x-0': sidebarOpen,
+        'lg:translate-x-0': true
+    }"
+    class="fixed top-0 bottom-0 w-80 bg-white dark:bg-neutral-900 overflow-y-auto transform transition-transform duration-500 sm:duration-300 z-50 md:z-30 rounded-r-xl md:rounded-none shadow-2xl md:shadow-none"
+    x-transition:enter="lg:hidden transition-transform ease-in-out duration-500 sm:duration-300" 
+    x-transition:enter-start="lg:hidden transform -translate-x-full" 
+    x-transition:enter-end="lg:hidden transform translate-x-0" 
+    x-transition:leave="lg:hidden transition-transform ease-in-out duration-500 sm:duration-300" 
+    x-transition:leave-start="lg:hidden transform translate-x-0" 
+    x-transition:leave-end="lg:hidden transform -translate-x-full"
+>
+    <!-- Container dalam dengan padding untuk scrollbar -->
+    <div class="h-full flex flex-col">
+        <!-- Course Progress Section - Fixed di atas -->
+        <div
+    class="px-4 py-3 border-b border-r border-neutral-200/50 dark:border-neutral-700/50 bg-neutral-100 dark:bg-neutral-800 md:mt-15 lg:mt-15"
+    x-data="{
+        totalLessons: 58,
+        completedLessons: 19,
+        get progressPercent() {
+            return this.totalLessons > 0
+                ? Math.round((this.completedLessons / this.totalLessons) * 100)
+                : 0;
+        }
+    }"
+>
+    <!-- Header -->
+    <div class="flex items-center justify-between text-sm mb-2">
+        <span class="text-neutral-600 dark:text-neutral-400">
+            Course Progress
+        </span>
+
+        <span
+            class="text-emerald-600 dark:text-emerald-400 font-medium text-sm"
+            x-text="progressPercent + '%'"
+        ></span>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="w-full bg-neutral-300 dark:bg-neutral-600 rounded-full h-2 shadow-inner">
+        <div
+            class="bg-gradient-to-r from-emerald-300 to-emerald-600
+                   h-2 rounded-full transition-all duration-300 shadow-sm"
+            :style="'width: ' + progressPercent + '%'"
+        ></div>
+    </div>
+
+    <!-- Info -->
+    <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-2">
+        <strong
+            class="font-semibold text-neutral-700 dark:text-neutral-300"
+            x-text="completedLessons"
+        ></strong>
+        dari
+        <strong
+            class="font-semibold text-neutral-700 dark:text-neutral-300"
+            x-text="totalLessons"
+        ></strong>
+        pelajaran selesai
+    </p>
+</div>
+        <!-- Content area dengan scroll -->
+        <div class="flex-1 overflow-hidden flex flex-col">
+            <!-- Padding kanan untuk scrollbar -->
+            <div class="list-active flex-1 overflow-y-auto rounded-rb-xl md:rounded-none border-r border-neutral-200 dark:border-neutral-700">
+                <div class="p-2 pt-3 md:pt-3">
+                    <!-- Navigation content -->
+                    <nav class="space-y-1">
+                        <div x-data="{
+    chapterId: 'chapter-1362-v84',
+    open: true,
+    
+    init() {
+        const savedState = localStorage.getItem(this.chapterId);
+        if (savedState !== null) {
+            this.open = savedState === 'true';
+        }
+        
+        this.$watch('open', (value) => {
+            localStorage.setItem(this.chapterId, value);
+        });
+    },
+    
+    toggle() {
+        this.open = !this.open;
+    }
+}" class="mb-4">
+    
+    <!-- Chapter Header -->
+    <button 
+        @click="toggle()" 
+        class="w-full flex items-center justify-between p-1  transition-colors"
+    >
+        <div class="flex items-center gap-3 flex-1 min-w-0">
+            <div class="bg-neutral-100 dark:bg-neutral-700 rounded-xl p-2 z-40">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder text-gray-500 dark:text-neutral-200 flex-shrink-0" style="" width="18" height="18" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2"></path>
+ </svg>            </div>
+            
+            <div class="text-left flex-1 min-w-0">
+                <h3 class="font-semibold text-gray-900 dark:text-white text-sm">
+                    Pendahuluan
+                </h3>
+                <div class="flex items-center gap-2 mt-1">
+                    <div class="flex-1 h-1 bg-gray-200 dark:bg-neutral-700 rounded-full overflow-hidden">
+                        <div 
+                            class="h-full bg-green-500 rounded-full transition-all duration-300"
+                            style="width: 100%"
+                        ></div>
+                    </div>
+                    <span class="text-xs text-gray-500 dark:text-gray-400 font-medium">
+                        4/4
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <svg 
+            class="w-4 h-4 text-gray-400 flex-shrink-0 transform transition-transform duration-200" 
+            :class="open ? 'rotate-180' : ''" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+        >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+    </button>
+
+    <!-- Lessons List -->
+    <div x-show="open" x-transition class="relative ml-5 mt-0 space-y-1">
+        <div class="absolute left-0 -top-5 bottom-0 w-px bg-gray-200 dark:bg-neutral-700"></div>
+        
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/5990?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check text-green-500 flex-shrink-0" style="" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+    <path d="M9 12l2 2l4 -4"></path>
+ </svg>                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Cover
+                    </span>
+                </a>
+            </div>
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/5991?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check text-green-500 flex-shrink-0" style="" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+    <path d="M9 12l2 2l4 -4"></path>
+ </svg>                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Kata Pengantar
+                    </span>
+                </a>
+            </div>
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/5992?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check text-green-500 flex-shrink-0" style="" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+    <path d="M9 12l2 2l4 -4"></path>
+ </svg>                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Lisensi
+                    </span>
+                </a>
+            </div>
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/5993?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check text-green-500 flex-shrink-0" style="" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+    <path d="M9 12l2 2l4 -4"></path>
+ </svg>                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Tentang
+                    </span>
+                </a>
+            </div>
+            </div>
+            <div class="relative">
+            <div class="absolute left-[20px] -top-2 h-13 z-10 w-px bg-gray-200 dark:bg-neutral-700"></div>
+        </div>
+    </div>
+
+<div x-data="{
+    chapterId: 'chapter-1363-v84',
+    open: true,
+    
+    init() {
+        const savedState = localStorage.getItem(this.chapterId);
+        if (savedState !== null) {
+            this.open = savedState === 'true';
+        }
+        
+        this.$watch('open', (value) => {
+            localStorage.setItem(this.chapterId, value);
+        });
+    },
+    
+    toggle() {
+        this.open = !this.open;
+    }
+}" class="mb-4">
+    
+    <!-- Chapter Header -->
+    <button 
+        @click="toggle()" 
+        class="w-full flex items-center justify-between p-1  transition-colors"
+    >
+        <div class="flex items-center gap-3 flex-1 min-w-0">
+            <div class="bg-neutral-100 dark:bg-neutral-700 rounded-xl p-2 z-40">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder text-gray-500 dark:text-neutral-200 flex-shrink-0" style="" width="18" height="18" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2"></path>
+ </svg>            </div>
+            
+            <div class="text-left flex-1 min-w-0">
+                <h3 class="font-semibold text-gray-900 dark:text-white text-sm">
+                    Prasyarat
+                </h3>
+                <div class="flex items-center gap-2 mt-1">
+                    <div class="flex-1 h-1 bg-gray-200 dark:bg-neutral-700 rounded-full overflow-hidden">
+                        <div 
+                            class="h-full bg-green-500 rounded-full transition-all duration-300"
+                            style="width: 100%"
+                        ></div>
+                    </div>
+                    <span class="text-xs text-gray-500 dark:text-gray-400 font-medium">
+                        2/2
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <svg 
+            class="w-4 h-4 text-gray-400 flex-shrink-0 transform transition-transform duration-200" 
+            :class="open ? 'rotate-180' : ''" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+        >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+    </button>
+
+    <!-- Lessons List -->
+    <div x-show="open" x-transition class="relative ml-5 mt-0 space-y-1">
+        <div class="absolute left-0 -top-5 bottom-0 w-px bg-gray-200 dark:bg-neutral-700"></div>
+        
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/5994?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check text-green-500 flex-shrink-0" style="" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+    <path d="M9 12l2 2l4 -4"></path>
+ </svg>                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Prasyarat Backend (Rust)
+                    </span>
+                </a>
+            </div>
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/5995?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check text-green-500 flex-shrink-0" style="" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+    <path d="M9 12l2 2l4 -4"></path>
+ </svg>                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Prasyarat Frontend (React)
+                    </span>
+                </a>
+            </div>
+            </div>
+            <div class="relative">
+            <div class="absolute left-[20px] -top-2 h-13 z-10 w-px bg-gray-200 dark:bg-neutral-700"></div>
+        </div>
+    </div>
+
+<div x-data="{
+    chapterId: 'chapter-1364-v84',
+    open: true,
+    
+    init() {
+        const savedState = localStorage.getItem(this.chapterId);
+        if (savedState !== null) {
+            this.open = savedState === 'true';
+        }
+        
+        this.$watch('open', (value) => {
+            localStorage.setItem(this.chapterId, value);
+        });
+    },
+    
+    toggle() {
+        this.open = !this.open;
+    }
+}" class="mb-4">
+    
+    <!-- Chapter Header -->
+    <button 
+        @click="toggle()" 
+        class="w-full flex items-center justify-between p-1  transition-colors"
+    >
+        <div class="flex items-center gap-3 flex-1 min-w-0">
+            <div class="bg-neutral-100 dark:bg-neutral-700 rounded-xl p-2 z-40">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder text-gray-500 dark:text-neutral-200 flex-shrink-0" style="" width="18" height="18" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2"></path>
+ </svg>            </div>
+            
+            <div class="text-left flex-1 min-w-0">
+                <h3 class="font-semibold text-gray-900 dark:text-white text-sm">
+                    Installasi &amp; Persiapan Backend (Rust)
+                </h3>
+                <div class="flex items-center gap-2 mt-1">
+                    <div class="flex-1 h-1 bg-gray-200 dark:bg-neutral-700 rounded-full overflow-hidden">
+                        <div 
+                            class="h-full bg-green-500 rounded-full transition-all duration-300"
+                            style="width: 100%"
+                        ></div>
+                    </div>
+                    <span class="text-xs text-gray-500 dark:text-gray-400 font-medium">
+                        5/5
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <svg 
+            class="w-4 h-4 text-gray-400 flex-shrink-0 transform transition-transform duration-200" 
+            :class="open ? 'rotate-180' : ''" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+        >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+    </button>
+
+    <!-- Lessons List -->
+    <div x-show="open" x-transition class="relative ml-5 mt-0 space-y-1">
+        <div class="absolute left-0 -top-5 bottom-0 w-px bg-gray-200 dark:bg-neutral-700"></div>
+        
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/5996?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check text-green-500 flex-shrink-0" style="" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+    <path d="M9 12l2 2l4 -4"></path>
+ </svg>                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Installasi Rust
+                    </span>
+                </a>
+            </div>
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/5997?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check text-green-500 flex-shrink-0" style="" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+    <path d="M9 12l2 2l4 -4"></path>
+ </svg>                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Membuat Project Rust
+                    </span>
+                </a>
+            </div>
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/5998?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check text-green-500 flex-shrink-0" style="" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+    <path d="M9 12l2 2l4 -4"></path>
+ </svg>                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Konfigurasi Live Reload Rust
+                    </span>
+                </a>
+            </div>
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/5999?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check text-green-500 flex-shrink-0" style="" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+    <path d="M9 12l2 2l4 -4"></path>
+ </svg>                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Installasi Dependency
+                    </span>
+                </a>
+            </div>
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6000?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check text-green-500 flex-shrink-0" style="" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+    <path d="M9 12l2 2l4 -4"></path>
+ </svg>                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Konfigurasi File .env
+                    </span>
+                </a>
+            </div>
+            </div>
+            <div class="relative">
+            <div class="absolute left-[20px] -top-2 h-13 z-10 w-px bg-gray-200 dark:bg-neutral-700"></div>
+        </div>
+    </div>
+
+<div x-data="{
+    chapterId: 'chapter-1365-v84',
+    open: true,
+    
+    init() {
+        const savedState = localStorage.getItem(this.chapterId);
+        if (savedState !== null) {
+            this.open = savedState === 'true';
+        }
+        
+        this.$watch('open', (value) => {
+            localStorage.setItem(this.chapterId, value);
+        });
+    },
+    
+    toggle() {
+        this.open = !this.open;
+    }
+}" class="mb-4">
+    
+    <!-- Chapter Header -->
+    <button 
+        @click="toggle()" 
+        class="w-full flex items-center justify-between p-1  transition-colors"
+    >
+        <div class="flex items-center gap-3 flex-1 min-w-0">
+            <div class="bg-neutral-100 dark:bg-neutral-700 rounded-xl p-2 z-40">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder text-gray-500 dark:text-neutral-200 flex-shrink-0" style="" width="18" height="18" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2"></path>
+ </svg>            </div>
+            
+            <div class="text-left flex-1 min-w-0">
+                <h3 class="font-semibold text-gray-900 dark:text-white text-sm">
+                    Database
+                </h3>
+                <div class="flex items-center gap-2 mt-1">
+                    <div class="flex-1 h-1 bg-gray-200 dark:bg-neutral-700 rounded-full overflow-hidden">
+                        <div 
+                            class="h-full bg-green-500 rounded-full transition-all duration-300"
+                            style="width: 100%"
+                        ></div>
+                    </div>
+                    <span class="text-xs text-gray-500 dark:text-gray-400 font-medium">
+                        2/2
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <svg 
+            class="w-4 h-4 text-gray-400 flex-shrink-0 transform transition-transform duration-200" 
+            :class="open ? 'rotate-180' : ''" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+        >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+    </button>
+
+    <!-- Lessons List -->
+    <div x-show="open" x-transition class="relative ml-5 mt-0 space-y-1">
+        <div class="absolute left-0 -top-5 bottom-0 w-px bg-gray-200 dark:bg-neutral-700"></div>
+        
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6001?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check text-green-500 flex-shrink-0" style="" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+    <path d="M9 12l2 2l4 -4"></path>
+ </svg>                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Konfigurasi Database
+                    </span>
+                </a>
+            </div>
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6002?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check text-green-500 flex-shrink-0" style="" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+    <path d="M9 12l2 2l4 -4"></path>
+ </svg>                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Membuat Model dan Migration User
+                    </span>
+                </a>
+            </div>
+            </div>
+            <div class="relative">
+            <div class="absolute left-[20px] -top-2 h-13 z-10 w-px bg-gray-200 dark:bg-neutral-700"></div>
+        </div>
+    </div>
+
+<div x-data="{
+    chapterId: 'chapter-1366-v84',
+    open: true,
+    
+    init() {
+        const savedState = localStorage.getItem(this.chapterId);
+        if (savedState !== null) {
+            this.open = savedState === 'true';
+        }
+        
+        this.$watch('open', (value) => {
+            localStorage.setItem(this.chapterId, value);
+        });
+    },
+    
+    toggle() {
+        this.open = !this.open;
+    }
+}" class="mb-4">
+    
+    <!-- Chapter Header -->
+    <button 
+        @click="toggle()" 
+        class="w-full flex items-center justify-between p-1  transition-colors"
+    >
+        <div class="flex items-center gap-3 flex-1 min-w-0">
+            <div class="bg-neutral-100 dark:bg-neutral-700 rounded-xl p-2 z-40">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder text-gray-500 dark:text-neutral-200 flex-shrink-0" style="" width="18" height="18" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2"></path>
+ </svg>            </div>
+            
+            <div class="text-left flex-1 min-w-0">
+                <h3 class="font-semibold text-gray-900 dark:text-white text-sm">
+                    JWT (JSON Web Token)
+                </h3>
+                <div class="flex items-center gap-2 mt-1">
+                    <div class="flex-1 h-1 bg-gray-200 dark:bg-neutral-700 rounded-full overflow-hidden">
+                        <div 
+                            class="h-full bg-green-500 rounded-full transition-all duration-300"
+                            style="width: 100%"
+                        ></div>
+                    </div>
+                    <span class="text-xs text-gray-500 dark:text-gray-400 font-medium">
+                        4/4
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <svg 
+            class="w-4 h-4 text-gray-400 flex-shrink-0 transform transition-transform duration-200" 
+            :class="open ? 'rotate-180' : ''" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+        >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+    </button>
+
+    <!-- Lessons List -->
+    <div x-show="open" x-transition class="relative ml-5 mt-0 space-y-1">
+        <div class="absolute left-0 -top-5 bottom-0 w-px bg-gray-200 dark:bg-neutral-700"></div>
+        
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6003?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check text-green-500 flex-shrink-0" style="" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+    <path d="M9 12l2 2l4 -4"></path>
+ </svg>                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Apa itu JWT?
+                    </span>
+                </a>
+            </div>
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6004?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check text-green-500 flex-shrink-0" style="" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+    <path d="M9 12l2 2l4 -4"></path>
+ </svg>                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Membuat Helpers JWT
+                    </span>
+                </a>
+            </div>
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6005?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check text-green-500 flex-shrink-0" style="" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+    <path d="M9 12l2 2l4 -4"></path>
+ </svg>                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Membuat Helper API Response
+                    </span>
+                </a>
+            </div>
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6006?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check text-green-500 flex-shrink-0" style="" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+    <path d="M9 12l2 2l4 -4"></path>
+ </svg>                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Membuat Middleware JWT
+                    </span>
+                </a>
+            </div>
+            </div>
+            <div class="relative">
+            <div class="absolute left-[20px] -top-2 h-13 z-10 w-px bg-gray-200 dark:bg-neutral-700"></div>
+        </div>
+    </div>
+
+<div x-data="{
+    chapterId: 'chapter-1367-v84',
+    open: true,
+    
+    init() {
+        const savedState = localStorage.getItem(this.chapterId);
+        if (savedState !== null) {
+            this.open = savedState === 'true';
+        }
+        
+        this.$watch('open', (value) => {
+            localStorage.setItem(this.chapterId, value);
+        });
+    },
+    
+    toggle() {
+        this.open = !this.open;
+    }
+}" class="mb-4">
+    
+    <!-- Chapter Header -->
+    <button 
+        @click="toggle()" 
+        class="w-full flex items-center justify-between p-1  transition-colors"
+    >
+        <div class="flex items-center gap-3 flex-1 min-w-0">
+            <div class="bg-neutral-100 dark:bg-neutral-700 rounded-xl p-2 z-40">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder text-gray-500 dark:text-neutral-200 flex-shrink-0" style="" width="18" height="18" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2"></path>
+ </svg>            </div>
+            
+            <div class="text-left flex-1 min-w-0">
+                <h3 class="font-semibold text-gray-900 dark:text-white text-sm">
+                    RESTful API Auth
+                </h3>
+                <div class="flex items-center gap-2 mt-1">
+                    <div class="flex-1 h-1 bg-gray-200 dark:bg-neutral-700 rounded-full overflow-hidden">
+                        <div 
+                            class="h-full bg-green-500 rounded-full transition-all duration-300"
+                            style="width: 50%"
+                        ></div>
+                    </div>
+                    <span class="text-xs text-gray-500 dark:text-gray-400 font-medium">
+                        2/4
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <svg 
+            class="w-4 h-4 text-gray-400 flex-shrink-0 transform transition-transform duration-200" 
+            :class="open ? 'rotate-180' : ''" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+        >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+    </button>
+
+    <!-- Lessons List -->
+    <div x-show="open" x-transition class="relative ml-5 mt-0 space-y-1">
+        <div class="absolute left-0 -top-5 bottom-0 w-px bg-gray-200 dark:bg-neutral-700"></div>
+        
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6007?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check text-green-500 flex-shrink-0" style="" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+    <path d="M9 12l2 2l4 -4"></path>
+ </svg>                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Membuat Schema Register
+                    </span>
+                </a>
+            </div>
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6008?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check text-green-500 flex-shrink-0" style="" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+    <path d="M9 12l2 2l4 -4"></path>
+ </svg>                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Membuat RESTful API untuk Register
+                    </span>
+                </a>
+            </div>
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6009?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item  active-sidebar "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': true,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !true
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle text-gray-400 flex-shrink-0 group-hover:text-gray-600 dark:group-hover:text-gray-300" style="">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg>
+                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Membuat Schema Login
+                    </span>
+                </a>
+            </div>
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6010?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle text-gray-400 flex-shrink-0 group-hover:text-gray-600 dark:group-hover:text-gray-300" style="">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg>
+                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Membuat RESTful API untuk Login
+                    </span>
+                </a>
+            </div>
+            </div>
+            <div class="relative">
+            <div class="absolute left-[20px] -top-2 h-13 z-10 w-px bg-gray-200 dark:bg-neutral-700"></div>
+        </div>
+    </div>
+
+<div x-data="{
+    chapterId: 'chapter-1368-v84',
+    open: true,
+    
+    init() {
+        const savedState = localStorage.getItem(this.chapterId);
+        if (savedState !== null) {
+            this.open = savedState === 'true';
+        }
+        
+        this.$watch('open', (value) => {
+            localStorage.setItem(this.chapterId, value);
+        });
+    },
+    
+    toggle() {
+        this.open = !this.open;
+    }
+}" class="mb-4">
+    
+    <!-- Chapter Header -->
+    <button 
+        @click="toggle()" 
+        class="w-full flex items-center justify-between p-1  transition-colors"
+    >
+        <div class="flex items-center gap-3 flex-1 min-w-0">
+            <div class="bg-neutral-100 dark:bg-neutral-700 rounded-xl p-2 z-40">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder text-gray-500 dark:text-neutral-200 flex-shrink-0" style="" width="18" height="18" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2"></path>
+ </svg>            </div>
+            
+            <div class="text-left flex-1 min-w-0">
+                <h3 class="font-semibold text-gray-900 dark:text-white text-sm">
+                    RESTful API Users
+                </h3>
+                <div class="flex items-center gap-2 mt-1">
+                    <div class="flex-1 h-1 bg-gray-200 dark:bg-neutral-700 rounded-full overflow-hidden">
+                        <div 
+                            class="h-full bg-green-500 rounded-full transition-all duration-300"
+                            style="width: 0%"
+                        ></div>
+                    </div>
+                    <span class="text-xs text-gray-500 dark:text-gray-400 font-medium">
+                        0/8
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <svg 
+            class="w-4 h-4 text-gray-400 flex-shrink-0 transform transition-transform duration-200" 
+            :class="open ? 'rotate-180' : ''" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+        >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+    </button>
+
+    <!-- Lessons List -->
+    <div x-show="open" x-transition class="relative ml-5 mt-0 space-y-1">
+        <div class="absolute left-0 -top-5 bottom-0 w-px bg-gray-200 dark:bg-neutral-700"></div>
+        
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6011?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle text-gray-400 flex-shrink-0 group-hover:text-gray-600 dark:group-hover:text-gray-300" style="">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg>
+                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Membuat RESTful API Get Data Users
+                    </span>
+                </a>
+            </div>
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6012?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle text-gray-400 flex-shrink-0 group-hover:text-gray-600 dark:group-hover:text-gray-300" style="">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg>
+                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Membuat Schema User Store Request
+                    </span>
+                </a>
+            </div>
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6013?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle text-gray-400 flex-shrink-0 group-hover:text-gray-600 dark:group-hover:text-gray-300" style="">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg>
+                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Membuat RESTful API Insert Data User
+                    </span>
+                </a>
+            </div>
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6014?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle text-gray-400 flex-shrink-0 group-hover:text-gray-600 dark:group-hover:text-gray-300" style="">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg>
+                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Membuat RESTful API Get Data User By ID
+                    </span>
+                </a>
+            </div>
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6015?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle text-gray-400 flex-shrink-0 group-hover:text-gray-600 dark:group-hover:text-gray-300" style="">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg>
+                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Membuat Schema User Update Request
+                    </span>
+                </a>
+            </div>
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6016?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle text-gray-400 flex-shrink-0 group-hover:text-gray-600 dark:group-hover:text-gray-300" style="">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg>
+                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Membuat RESTful API Update Data User
+                    </span>
+                </a>
+            </div>
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6017?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle text-gray-400 flex-shrink-0 group-hover:text-gray-600 dark:group-hover:text-gray-300" style="">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg>
+                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Membuat RESTful API Delete Data User
+                    </span>
+                </a>
+            </div>
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6018?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle text-gray-400 flex-shrink-0 group-hover:text-gray-600 dark:group-hover:text-gray-300" style="">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg>
+                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Konfigurasi CORS
+                    </span>
+                </a>
+            </div>
+            </div>
+            <div class="relative">
+            <div class="absolute left-[20px] -top-2 h-13 z-10 w-px bg-gray-200 dark:bg-neutral-700"></div>
+        </div>
+    </div>
+
+<div x-data="{
+    chapterId: 'chapter-1369-v84',
+    open: true,
+    
+    init() {
+        const savedState = localStorage.getItem(this.chapterId);
+        if (savedState !== null) {
+            this.open = savedState === 'true';
+        }
+        
+        this.$watch('open', (value) => {
+            localStorage.setItem(this.chapterId, value);
+        });
+    },
+    
+    toggle() {
+        this.open = !this.open;
+    }
+}" class="mb-4">
+    
+    <!-- Chapter Header -->
+    <button 
+        @click="toggle()" 
+        class="w-full flex items-center justify-between p-1  transition-colors"
+    >
+        <div class="flex items-center gap-3 flex-1 min-w-0">
+            <div class="bg-neutral-100 dark:bg-neutral-700 rounded-xl p-2 z-40">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder text-gray-500 dark:text-neutral-200 flex-shrink-0" style="" width="18" height="18" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2"></path>
+ </svg>            </div>
+            
+            <div class="text-left flex-1 min-w-0">
+                <h3 class="font-semibold text-gray-900 dark:text-white text-sm">
+                    Installasi &amp; Persiapan Frontend (React)
+                </h3>
+                <div class="flex items-center gap-2 mt-1">
+                    <div class="flex-1 h-1 bg-gray-200 dark:bg-neutral-700 rounded-full overflow-hidden">
+                        <div 
+                            class="h-full bg-green-500 rounded-full transition-all duration-300"
+                            style="width: 0%"
+                        ></div>
+                    </div>
+                    <span class="text-xs text-gray-500 dark:text-gray-400 font-medium">
+                        0/4
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <svg 
+            class="w-4 h-4 text-gray-400 flex-shrink-0 transform transition-transform duration-200" 
+            :class="open ? 'rotate-180' : ''" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+        >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+    </button>
+
+    <!-- Lessons List -->
+    <div x-show="open" x-transition class="relative ml-5 mt-0 space-y-1">
+        <div class="absolute left-0 -top-5 bottom-0 w-px bg-gray-200 dark:bg-neutral-700"></div>
+        
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6019?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle text-gray-400 flex-shrink-0 group-hover:text-gray-600 dark:group-hover:text-gray-300" style="">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg>
+                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Membuat Project React (TypeScript)
+                    </span>
+                </a>
+            </div>
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6020?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle text-gray-400 flex-shrink-0 group-hover:text-gray-600 dark:group-hover:text-gray-300" style="">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg>
+                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Install Library Pendukung
+                    </span>
+                </a>
+            </div>
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6021?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle text-gray-400 flex-shrink-0 group-hover:text-gray-600 dark:group-hover:text-gray-300" style="">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg>
+                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Konfigurasi Endpoint API Backend
+                    </span>
+                </a>
+            </div>
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6022?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle text-gray-400 flex-shrink-0 group-hover:text-gray-600 dark:group-hover:text-gray-300" style="">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg>
+                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Integrasi Bootstrap
+                    </span>
+                </a>
+            </div>
+            </div>
+            <div class="relative">
+            <div class="absolute left-[20px] -top-2 h-13 z-10 w-px bg-gray-200 dark:bg-neutral-700"></div>
+        </div>
+    </div>
+
+<div x-data="{
+    chapterId: 'chapter-1370-v84',
+    open: true,
+    
+    init() {
+        const savedState = localStorage.getItem(this.chapterId);
+        if (savedState !== null) {
+            this.open = savedState === 'true';
+        }
+        
+        this.$watch('open', (value) => {
+            localStorage.setItem(this.chapterId, value);
+        });
+    },
+    
+    toggle() {
+        this.open = !this.open;
+    }
+}" class="mb-4">
+    
+    <!-- Chapter Header -->
+    <button 
+        @click="toggle()" 
+        class="w-full flex items-center justify-between p-1  transition-colors"
+    >
+        <div class="flex items-center gap-3 flex-1 min-w-0">
+            <div class="bg-neutral-100 dark:bg-neutral-700 rounded-xl p-2 z-40">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder text-gray-500 dark:text-neutral-200 flex-shrink-0" style="" width="18" height="18" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2"></path>
+ </svg>            </div>
+            
+            <div class="text-left flex-1 min-w-0">
+                <h3 class="font-semibold text-gray-900 dark:text-white text-sm">
+                    TanStack Query
+                </h3>
+                <div class="flex items-center gap-2 mt-1">
+                    <div class="flex-1 h-1 bg-gray-200 dark:bg-neutral-700 rounded-full overflow-hidden">
+                        <div 
+                            class="h-full bg-green-500 rounded-full transition-all duration-300"
+                            style="width: 0%"
+                        ></div>
+                    </div>
+                    <span class="text-xs text-gray-500 dark:text-gray-400 font-medium">
+                        0/2
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <svg 
+            class="w-4 h-4 text-gray-400 flex-shrink-0 transform transition-transform duration-200" 
+            :class="open ? 'rotate-180' : ''" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+        >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+    </button>
+
+    <!-- Lessons List -->
+    <div x-show="open" x-transition class="relative ml-5 mt-0 space-y-1">
+        <div class="absolute left-0 -top-5 bottom-0 w-px bg-gray-200 dark:bg-neutral-700"></div>
+        
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6023?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle text-gray-400 flex-shrink-0 group-hover:text-gray-600 dark:group-hover:text-gray-300" style="">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg>
+                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Apa itu TanStack Query ?
+                    </span>
+                </a>
+            </div>
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6024?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle text-gray-400 flex-shrink-0 group-hover:text-gray-600 dark:group-hover:text-gray-300" style="">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg>
+                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Install dan Konfigurasi TanStack Query
+                    </span>
+                </a>
+            </div>
+            </div>
+            <div class="relative">
+            <div class="absolute left-[20px] -top-2 h-13 z-10 w-px bg-gray-200 dark:bg-neutral-700"></div>
+        </div>
+    </div>
+
+<div x-data="{
+    chapterId: 'chapter-1371-v84',
+    open: true,
+    
+    init() {
+        const savedState = localStorage.getItem(this.chapterId);
+        if (savedState !== null) {
+            this.open = savedState === 'true';
+        }
+        
+        this.$watch('open', (value) => {
+            localStorage.setItem(this.chapterId, value);
+        });
+    },
+    
+    toggle() {
+        this.open = !this.open;
+    }
+}" class="mb-4">
+    
+    <!-- Chapter Header -->
+    <button 
+        @click="toggle()" 
+        class="w-full flex items-center justify-between p-1  transition-colors"
+    >
+        <div class="flex items-center gap-3 flex-1 min-w-0">
+            <div class="bg-neutral-100 dark:bg-neutral-700 rounded-xl p-2 z-40">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder text-gray-500 dark:text-neutral-200 flex-shrink-0" style="" width="18" height="18" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2"></path>
+ </svg>            </div>
+            
+            <div class="text-left flex-1 min-w-0">
+                <h3 class="font-semibold text-gray-900 dark:text-white text-sm">
+                    Auth Context
+                </h3>
+                <div class="flex items-center gap-2 mt-1">
+                    <div class="flex-1 h-1 bg-gray-200 dark:bg-neutral-700 rounded-full overflow-hidden">
+                        <div 
+                            class="h-full bg-green-500 rounded-full transition-all duration-300"
+                            style="width: 0%"
+                        ></div>
+                    </div>
+                    <span class="text-xs text-gray-500 dark:text-gray-400 font-medium">
+                        0/1
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <svg 
+            class="w-4 h-4 text-gray-400 flex-shrink-0 transform transition-transform duration-200" 
+            :class="open ? 'rotate-180' : ''" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+        >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+    </button>
+
+    <!-- Lessons List -->
+    <div x-show="open" x-transition class="relative ml-5 mt-0 space-y-1">
+        <div class="absolute left-0 -top-5 bottom-0 w-px bg-gray-200 dark:bg-neutral-700"></div>
+        
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6025?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle text-gray-400 flex-shrink-0 group-hover:text-gray-600 dark:group-hover:text-gray-300" style="">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg>
+                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Membuat Auth Context
+                    </span>
+                </a>
+            </div>
+            </div>
+            <div class="relative">
+            <div class="absolute left-[20px] -top-2 h-13 z-10 w-px bg-gray-200 dark:bg-neutral-700"></div>
+        </div>
+    </div>
+
+<div x-data="{
+    chapterId: 'chapter-1372-v84',
+    open: true,
+    
+    init() {
+        const savedState = localStorage.getItem(this.chapterId);
+        if (savedState !== null) {
+            this.open = savedState === 'true';
+        }
+        
+        this.$watch('open', (value) => {
+            localStorage.setItem(this.chapterId, value);
+        });
+    },
+    
+    toggle() {
+        this.open = !this.open;
+    }
+}" class="mb-4">
+    
+    <!-- Chapter Header -->
+    <button 
+        @click="toggle()" 
+        class="w-full flex items-center justify-between p-1  transition-colors"
+    >
+        <div class="flex items-center gap-3 flex-1 min-w-0">
+            <div class="bg-neutral-100 dark:bg-neutral-700 rounded-xl p-2 z-40">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder text-gray-500 dark:text-neutral-200 flex-shrink-0" style="" width="18" height="18" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2"></path>
+ </svg>            </div>
+            
+            <div class="text-left flex-1 min-w-0">
+                <h3 class="font-semibold text-gray-900 dark:text-white text-sm">
+                    Auth Hooks
+                </h3>
+                <div class="flex items-center gap-2 mt-1">
+                    <div class="flex-1 h-1 bg-gray-200 dark:bg-neutral-700 rounded-full overflow-hidden">
+                        <div 
+                            class="h-full bg-green-500 rounded-full transition-all duration-300"
+                            style="width: 0%"
+                        ></div>
+                    </div>
+                    <span class="text-xs text-gray-500 dark:text-gray-400 font-medium">
+                        0/4
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <svg 
+            class="w-4 h-4 text-gray-400 flex-shrink-0 transform transition-transform duration-200" 
+            :class="open ? 'rotate-180' : ''" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+        >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+    </button>
+
+    <!-- Lessons List -->
+    <div x-show="open" x-transition class="relative ml-5 mt-0 space-y-1">
+        <div class="absolute left-0 -top-5 bottom-0 w-px bg-gray-200 dark:bg-neutral-700"></div>
+        
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6026?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle text-gray-400 flex-shrink-0 group-hover:text-gray-600 dark:group-hover:text-gray-300" style="">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg>
+                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Membuat Custom Hook Register (Mutation)
+                    </span>
+                </a>
+            </div>
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6027?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle text-gray-400 flex-shrink-0 group-hover:text-gray-600 dark:group-hover:text-gray-300" style="">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg>
+                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Membuat Custom Hook Login (Mutation)
+                    </span>
+                </a>
+            </div>
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6028?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle text-gray-400 flex-shrink-0 group-hover:text-gray-600 dark:group-hover:text-gray-300" style="">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg>
+                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Membuat Custom Hook Auth User
+                    </span>
+                </a>
+            </div>
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6029?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle text-gray-400 flex-shrink-0 group-hover:text-gray-600 dark:group-hover:text-gray-300" style="">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg>
+                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Membuat Custom Hook Logout
+                    </span>
+                </a>
+            </div>
+            </div>
+            <div class="relative">
+            <div class="absolute left-[20px] -top-2 h-13 z-10 w-px bg-gray-200 dark:bg-neutral-700"></div>
+        </div>
+    </div>
+
+<div x-data="{
+    chapterId: 'chapter-1373-v84',
+    open: true,
+    
+    init() {
+        const savedState = localStorage.getItem(this.chapterId);
+        if (savedState !== null) {
+            this.open = savedState === 'true';
+        }
+        
+        this.$watch('open', (value) => {
+            localStorage.setItem(this.chapterId, value);
+        });
+    },
+    
+    toggle() {
+        this.open = !this.open;
+    }
+}" class="mb-4">
+    
+    <!-- Chapter Header -->
+    <button 
+        @click="toggle()" 
+        class="w-full flex items-center justify-between p-1  transition-colors"
+    >
+        <div class="flex items-center gap-3 flex-1 min-w-0">
+            <div class="bg-neutral-100 dark:bg-neutral-700 rounded-xl p-2 z-40">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder text-gray-500 dark:text-neutral-200 flex-shrink-0" style="" width="18" height="18" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2"></path>
+ </svg>            </div>
+            
+            <div class="text-left flex-1 min-w-0">
+                <h3 class="font-semibold text-gray-900 dark:text-white text-sm">
+                    Authentication
+                </h3>
+                <div class="flex items-center gap-2 mt-1">
+                    <div class="flex-1 h-1 bg-gray-200 dark:bg-neutral-700 rounded-full overflow-hidden">
+                        <div 
+                            class="h-full bg-green-500 rounded-full transition-all duration-300"
+                            style="width: 0%"
+                        ></div>
+                    </div>
+                    <span class="text-xs text-gray-500 dark:text-gray-400 font-medium">
+                        0/3
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <svg 
+            class="w-4 h-4 text-gray-400 flex-shrink-0 transform transition-transform duration-200" 
+            :class="open ? 'rotate-180' : ''" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+        >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+    </button>
+
+    <!-- Lessons List -->
+    <div x-show="open" x-transition class="relative ml-5 mt-0 space-y-1">
+        <div class="absolute left-0 -top-5 bottom-0 w-px bg-gray-200 dark:bg-neutral-700"></div>
+        
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6030?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle text-gray-400 flex-shrink-0 group-hover:text-gray-600 dark:group-hover:text-gray-300" style="">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg>
+                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Membuat View dan Route untuk Auth
+                    </span>
+                </a>
+            </div>
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6031?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle text-gray-400 flex-shrink-0 group-hover:text-gray-600 dark:group-hover:text-gray-300" style="">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg>
+                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Membuat Proses Register
+                    </span>
+                </a>
+            </div>
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6032?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle text-gray-400 flex-shrink-0 group-hover:text-gray-600 dark:group-hover:text-gray-300" style="">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg>
+                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Membuat Proses Login
+                    </span>
+                </a>
+            </div>
+            </div>
+            <div class="relative">
+            <div class="absolute left-[20px] -top-2 h-13 z-10 w-px bg-gray-200 dark:bg-neutral-700"></div>
+        </div>
+    </div>
+
+<div x-data="{
+    chapterId: 'chapter-1374-v84',
+    open: true,
+    
+    init() {
+        const savedState = localStorage.getItem(this.chapterId);
+        if (savedState !== null) {
+            this.open = savedState === 'true';
+        }
+        
+        this.$watch('open', (value) => {
+            localStorage.setItem(this.chapterId, value);
+        });
+    },
+    
+    toggle() {
+        this.open = !this.open;
+    }
+}" class="mb-4">
+    
+    <!-- Chapter Header -->
+    <button 
+        @click="toggle()" 
+        class="w-full flex items-center justify-between p-1  transition-colors"
+    >
+        <div class="flex items-center gap-3 flex-1 min-w-0">
+            <div class="bg-neutral-100 dark:bg-neutral-700 rounded-xl p-2 z-40">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder text-gray-500 dark:text-neutral-200 flex-shrink-0" style="" width="18" height="18" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2"></path>
+ </svg>            </div>
+            
+            <div class="text-left flex-1 min-w-0">
+                <h3 class="font-semibold text-gray-900 dark:text-white text-sm">
+                    Halaman Dashboard
+                </h3>
+                <div class="flex items-center gap-2 mt-1">
+                    <div class="flex-1 h-1 bg-gray-200 dark:bg-neutral-700 rounded-full overflow-hidden">
+                        <div 
+                            class="h-full bg-green-500 rounded-full transition-all duration-300"
+                            style="width: 0%"
+                        ></div>
+                    </div>
+                    <span class="text-xs text-gray-500 dark:text-gray-400 font-medium">
+                        0/3
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <svg 
+            class="w-4 h-4 text-gray-400 flex-shrink-0 transform transition-transform duration-200" 
+            :class="open ? 'rotate-180' : ''" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+        >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+    </button>
+
+    <!-- Lessons List -->
+    <div x-show="open" x-transition class="relative ml-5 mt-0 space-y-1">
+        <div class="absolute left-0 -top-5 bottom-0 w-px bg-gray-200 dark:bg-neutral-700"></div>
+        
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6033?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle text-gray-400 flex-shrink-0 group-hover:text-gray-600 dark:group-hover:text-gray-300" style="">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg>
+                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Membuat View dan Route untuk Dashboard
+                    </span>
+                </a>
+            </div>
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6034?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle text-gray-400 flex-shrink-0 group-hover:text-gray-600 dark:group-hover:text-gray-300" style="">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg>
+                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Menampilkan User di Halaman Dashboard
+                    </span>
+                </a>
+            </div>
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6035?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle text-gray-400 flex-shrink-0 group-hover:text-gray-600 dark:group-hover:text-gray-300" style="">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg>
+                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Membuat Proses Logout
+                    </span>
+                </a>
+            </div>
+            </div>
+            <div class="relative">
+            <div class="absolute left-[20px] -top-2 h-13 z-10 w-px bg-gray-200 dark:bg-neutral-700"></div>
+        </div>
+    </div>
+
+<div x-data="{
+    chapterId: 'chapter-1375-v84',
+    open: true,
+    
+    init() {
+        const savedState = localStorage.getItem(this.chapterId);
+        if (savedState !== null) {
+            this.open = savedState === 'true';
+        }
+        
+        this.$watch('open', (value) => {
+            localStorage.setItem(this.chapterId, value);
+        });
+    },
+    
+    toggle() {
+        this.open = !this.open;
+    }
+}" class="mb-4">
+    
+    <!-- Chapter Header -->
+    <button 
+        @click="toggle()" 
+        class="w-full flex items-center justify-between p-1  transition-colors"
+    >
+        <div class="flex items-center gap-3 flex-1 min-w-0">
+            <div class="bg-neutral-100 dark:bg-neutral-700 rounded-xl p-2 z-40">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder text-gray-500 dark:text-neutral-200 flex-shrink-0" style="" width="18" height="18" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2"></path>
+ </svg>            </div>
+            
+            <div class="text-left flex-1 min-w-0">
+                <h3 class="font-semibold text-gray-900 dark:text-white text-sm">
+                    User Hooks
+                </h3>
+                <div class="flex items-center gap-2 mt-1">
+                    <div class="flex-1 h-1 bg-gray-200 dark:bg-neutral-700 rounded-full overflow-hidden">
+                        <div 
+                            class="h-full bg-green-500 rounded-full transition-all duration-300"
+                            style="width: 0%"
+                        ></div>
+                    </div>
+                    <span class="text-xs text-gray-500 dark:text-gray-400 font-medium">
+                        0/5
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <svg 
+            class="w-4 h-4 text-gray-400 flex-shrink-0 transform transition-transform duration-200" 
+            :class="open ? 'rotate-180' : ''" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+        >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+    </button>
+
+    <!-- Lessons List -->
+    <div x-show="open" x-transition class="relative ml-5 mt-0 space-y-1">
+        <div class="absolute left-0 -top-5 bottom-0 w-px bg-gray-200 dark:bg-neutral-700"></div>
+        
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6036?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle text-gray-400 flex-shrink-0 group-hover:text-gray-600 dark:group-hover:text-gray-300" style="">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg>
+                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Membuat Custom Hook Users (Query)
+                    </span>
+                </a>
+            </div>
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6037?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle text-gray-400 flex-shrink-0 group-hover:text-gray-600 dark:group-hover:text-gray-300" style="">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg>
+                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Membuat Custom Hook User Create (Mutation)
+                    </span>
+                </a>
+            </div>
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6038?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle text-gray-400 flex-shrink-0 group-hover:text-gray-600 dark:group-hover:text-gray-300" style="">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg>
+                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Membuat Custom Hook User By Id (Query)
+                    </span>
+                </a>
+            </div>
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6039?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle text-gray-400 flex-shrink-0 group-hover:text-gray-600 dark:group-hover:text-gray-300" style="">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg>
+                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Membuat Custom Hook User Update (Mutation)
+                    </span>
+                </a>
+            </div>
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6040?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle text-gray-400 flex-shrink-0 group-hover:text-gray-600 dark:group-hover:text-gray-300" style="">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg>
+                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Membuat Custom hook User Delete (Mutation)
+                    </span>
+                </a>
+            </div>
+            </div>
+            <div class="relative">
+            <div class="absolute left-[20px] -top-2 h-13 z-10 w-px bg-gray-200 dark:bg-neutral-700"></div>
+        </div>
+    </div>
+
+<div x-data="{
+    chapterId: 'chapter-1376-v84',
+    open: true,
+    
+    init() {
+        const savedState = localStorage.getItem(this.chapterId);
+        if (savedState !== null) {
+            this.open = savedState === 'true';
+        }
+        
+        this.$watch('open', (value) => {
+            localStorage.setItem(this.chapterId, value);
+        });
+    },
+    
+    toggle() {
+        this.open = !this.open;
+    }
+}" class="mb-4">
+    
+    <!-- Chapter Header -->
+    <button 
+        @click="toggle()" 
+        class="w-full flex items-center justify-between p-1  transition-colors"
+    >
+        <div class="flex items-center gap-3 flex-1 min-w-0">
+            <div class="bg-neutral-100 dark:bg-neutral-700 rounded-xl p-2 z-40">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder text-gray-500 dark:text-neutral-200 flex-shrink-0" style="" width="18" height="18" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2"></path>
+ </svg>            </div>
+            
+            <div class="text-left flex-1 min-w-0">
+                <h3 class="font-semibold text-gray-900 dark:text-white text-sm">
+                    CRUD Data Users
+                </h3>
+                <div class="flex items-center gap-2 mt-1">
+                    <div class="flex-1 h-1 bg-gray-200 dark:bg-neutral-700 rounded-full overflow-hidden">
+                        <div 
+                            class="h-full bg-green-500 rounded-full transition-all duration-300"
+                            style="width: 0%"
+                        ></div>
+                    </div>
+                    <span class="text-xs text-gray-500 dark:text-gray-400 font-medium">
+                        0/4
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <svg 
+            class="w-4 h-4 text-gray-400 flex-shrink-0 transform transition-transform duration-200" 
+            :class="open ? 'rotate-180' : ''" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+        >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+    </button>
+
+    <!-- Lessons List -->
+    <div x-show="open" x-transition class="relative ml-5 mt-0 space-y-1">
+        <div class="absolute left-0 -top-5 bottom-0 w-px bg-gray-200 dark:bg-neutral-700"></div>
+        
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6041?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle text-gray-400 flex-shrink-0 group-hover:text-gray-600 dark:group-hover:text-gray-300" style="">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg>
+                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Menampilkan List Data Users
+                    </span>
+                </a>
+            </div>
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6042?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle text-gray-400 flex-shrink-0 group-hover:text-gray-600 dark:group-hover:text-gray-300" style="">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg>
+                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Membuat Proses Create Data User
+                    </span>
+                </a>
+            </div>
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6043?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle text-gray-400 flex-shrink-0 group-hover:text-gray-600 dark:group-hover:text-gray-300" style="">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg>
+                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Membuat Proses Edit dan Update Data User
+                    </span>
+                </a>
+            </div>
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6044?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle text-gray-400 flex-shrink-0 group-hover:text-gray-600 dark:group-hover:text-gray-300" style="">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg>
+                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Membuat Proses Delete Data User
+                    </span>
+                </a>
+            </div>
+            </div>
+            <div class="relative">
+            <div class="absolute left-[20px] -top-2 h-13 z-10 w-px bg-gray-200 dark:bg-neutral-700"></div>
+        </div>
+    </div>
+
+<div x-data="{
+    chapterId: 'chapter-1377-v84',
+    open: true,
+    
+    init() {
+        const savedState = localStorage.getItem(this.chapterId);
+        if (savedState !== null) {
+            this.open = savedState === 'true';
+        }
+        
+        this.$watch('open', (value) => {
+            localStorage.setItem(this.chapterId, value);
+        });
+    },
+    
+    toggle() {
+        this.open = !this.open;
+    }
+}" class="mb-4">
+    
+    <!-- Chapter Header -->
+    <button 
+        @click="toggle()" 
+        class="w-full flex items-center justify-between p-1  transition-colors"
+    >
+        <div class="flex items-center gap-3 flex-1 min-w-0">
+            <div class="bg-neutral-100 dark:bg-neutral-700 rounded-xl p-2 z-40">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder text-gray-500 dark:text-neutral-200 flex-shrink-0" style="" width="18" height="18" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2"></path>
+ </svg>            </div>
+            
+            <div class="text-left flex-1 min-w-0">
+                <h3 class="font-semibold text-gray-900 dark:text-white text-sm">
+                    Penutup
+                </h3>
+                <div class="flex items-center gap-2 mt-1">
+                    <div class="flex-1 h-1 bg-gray-200 dark:bg-neutral-700 rounded-full overflow-hidden">
+                        <div 
+                            class="h-full bg-green-500 rounded-full transition-all duration-300"
+                            style="width: 0%"
+                        ></div>
+                    </div>
+                    <span class="text-xs text-gray-500 dark:text-gray-400 font-medium">
+                        0/3
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <svg 
+            class="w-4 h-4 text-gray-400 flex-shrink-0 transform transition-transform duration-200" 
+            :class="open ? 'rotate-180' : ''" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+        >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+    </button>
+
+    <!-- Lessons List -->
+    <div x-show="open" x-transition class="relative ml-5 mt-0 space-y-1">
+        <div class="absolute left-0 -top-5 bottom-0 w-px bg-gradient-to-b from-gray-200 to-transparent dark:from-neutral-700 dark:to-transparent"></div>
+        
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6045?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle text-gray-400 flex-shrink-0 group-hover:text-gray-600 dark:group-hover:text-gray-300" style="">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg>
+                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Donasi
+                    </span>
+                </a>
+            </div>
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6046?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle text-gray-400 flex-shrink-0 group-hover:text-gray-600 dark:group-hover:text-gray-300" style="">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg>
+                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Promosi
+                    </span>
+                </a>
+            </div>
+                    
+            <div class="relative pl-2">
+                <a 
+                    href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6047?version=1.1.0" 
+                    class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-sm transition-colors group scroll-active-item "
+                    :class="{
+                        'bg-neutral-700 dark:bg-neutral-200/20 text-white dark:text-neutral-300 border border-neutral-700 dark:border-neutral-700': false,
+                        'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-neutral-800 hover:text-gray-900 dark:hover:text-gray-100': !false
+                    }"
+                >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle text-gray-400 flex-shrink-0 group-hover:text-gray-600 dark:group-hover:text-gray-300" style="">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /></svg>
+                    
+                    <span class="flex-1 min-w-0 leading-relaxed">
+                        Penutup
+                    </span>
+                </a>
+            </div>
+            </div>
+    </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</aside>
+
+<!-- Overlay hanya untuk mobile -->
+<div 
+    x-cloak 
+    x-show="sidebarOpen" 
+    x-transition.opacity.duration.300
+    @click="sidebarOpen = false" 
+    class="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden lg:hidden"
+></div>
+
+<div x-data x-init="$nextTick(()=>{const a=document.querySelector('.active-sidebar'),l=document.querySelector('.list-active');if(!a||!l)return;try{a.scrollIntoView({behavior:'smooth',block:'center'});return}catch(e){}const t=Math.max(0,a.offsetTop-120);l.scrollTo({top:t,behavior:'smooth'})})">
+</div>
+        <!-- Main Content -->
+        <main class="flex-1 min-w-0 lg:ml-80 mr-0 xl:mr-64 transition-all duration-300 pt-10 md:pt-0">
+            <div class="max-w-full mx-auto px-4 sm:px-6 md:px-8 py-5">
+                <h1 class="text-3xl font-bold text-neutral-900 dark:text-neutral-100 mb-3">Membuat Schema Login</h1>
+
+                <div class="prose lg:prose-lg prose-a:text-blue-500 dark:prose-a:text-blue-400 dark:prose-invert w-full max-w-full">
+                    <div x-data x-init="let t=document.querySelector('.table-of-contents'),d=document.querySelector('.toc'),m=document.querySelector('.toc-mobile'),b=document.querySelector('.btn-toc');if(t&&t.querySelectorAll('li').length>0){d.appendChild(t.cloneNode(true));m.appendChild(t.cloneNode(true))}else b?.classList.add('hidden');$nextTick(()=>{document.querySelectorAll(`.prose a[href^='http']`).forEach(a=>{a.href.includes(location.hostname)||(a.target='_blank',a.rel='noopener noreferrer')})})">
+                    </div>
+
+                                            <ul class="table-of-contents">
+<li><a href="#content-langkah-1--menambahkan-file-schema-login">Langkah 1 – Menambahkan File Schema Login</a></li>
+<li><a href="#content-langkah-2--file-loginschemars">Langkah 2 – File login_schema.rs</a>
+<ul>
+<li><a href="#content-schema-loginrequest">Schema LoginRequest</a></li>
+<li><a href="#content-schema-userresponse">Schema UserResponse</a></li>
+<li><a href="#content-schema-loginresponse">Schema LoginResponse</a></li>
+</ul>
+</li>
+<li><a href="#content-langkah-3--mendaftarkan-module-schema">Langkah 3 – Mendaftarkan Module Schema</a></li>
+</ul>
+<p>Pada tahap ini, kita akan menyiapkan <strong>Schema Login</strong> yang digunakan untuk mengatur struktur data <em><strong>request</strong></em> dan <em><strong>response</strong></em> pada proses <strong><em>login</em> <em>user</em></strong>.</p>
+<p><em>Schema</em> <em>login</em> ini berfungsi untuk memastikan bahwa data yang dikirim oleh <em>client</em> sudah sesuai dengan aturan yang kita tentukan, serta membatasi data apa saja yang boleh dikembalikan ke <em>client</em> setelah proses <em>login</em> berhasil. Dengan pendekatan ini, <em>logic</em> validasi dan struktur data tetap terpisah dari <em>logic</em> bisnis di <em>handler</em>.</p>
+<h3><a id="content-langkah-1--menambahkan-file-schema-login" href="#content-langkah-1--menambahkan-file-schema-login" class="heading-permalink" aria-hidden="true" title="Permalink"></a>Langkah 1 – Menambahkan File Schema Login</h3>
+<p>Karena sebelumnya kita sudah memiliki <em>folder</em> <code>schemas</code>, maka pada tahap ini kita hanya perlu menambahkan <em>file</em> baru untuk <em>schema</em> <em>login</em>.</p>
+<p>Silakan buat <em>file</em> baru dengan nama <code>login_schema.rs</code> di dalam <em>folder</em> <code>src/schemas</code>. Struktur <em>folder</em> akan menjadi seperti ini:</p>
+<pre><code>src
+├── schemas
+│   ├── register_schema.rs
+│   ├── login_schema.rs
+│   └── mod.rs
+├── middlewares
+├── utils
+├── models
+├── config
+└── main.rs
+</code></pre>
+<h3><a id="content-langkah-2--file-loginschemars" href="#content-langkah-2--file-loginschemars" class="heading-permalink" aria-hidden="true" title="Permalink"></a>Langkah 2 – File <code>login_schema.rs</code></h3>
+<p>Silakan teman-teman buka <em>file</em> <code>src/schemas/login_schema.rs</code>, lalu isi dengan kode berikut:</p>
+<pre><code>use serde::{Serialize, Deserialize};
+use validator::Validate;
+
+#[derive(Deserialize, Validate)]
+pub struct LoginRequest {
+    #[validate(email(message = &quot;Email tidak valid&quot;))]
+    pub email: String,
+
+    #[validate(length(min = 6, message = &quot;Password minimal 6 karakter&quot;))]
+    pub password: String,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct UserResponse {
+    pub id: i64,
+    pub name: String,
+    pub email: String,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct LoginResponse {
+    pub user: UserResponse,
+    pub token: String,
+}
+</code></pre>
+<p>Dari penambahan kode di atas, pertama kita meng-<em>import</em> <em>trait</em> <code>Serialize</code> dan <code>Deserialize</code> dari <em>crate</em> <code>serde</code>, serta <em>trait</em> <code>Validate</code> dari <em>crate</em> <code>validator</code>.</p>
+<pre><code>use serde::{Serialize, Deserialize};
+use validator::Validate;
+</code></pre>
+<ul>
+<li><code>Deserialize</code>
+Digunakan untuk menerima data dari <em>client</em> (<em>request</em> <em>body</em>).</li>
+<li><code>Serialize</code>
+Digunakan untuk mengirim data ke <em>client</em> dalam bentuk <em>response</em> JSON.</li>
+<li><code>Validate</code>
+Digunakan untuk mengaktifkan fitur validasi berbasis <em>attribute</em> pada <em>struct</em>.</li>
+</ul>
+<p>Selanjutnya, kita membuat beberapa <em>schema</em> menggunakan <em>struct</em>, yaitu:</p>
+<ul>
+<li>
+<h4><a id="content-schema-loginrequest" href="#content-schema-loginrequest" class="heading-permalink" aria-hidden="true" title="Permalink"></a>Schema <code>LoginRequest</code></h4>
+<p>Schema ini digunakan untuk menerima data <em>request</em> saat proses <em>login</em> <em>user</em>.</p>
+<pre><code>#[derive(Deserialize, Validate)]
+pub struct LoginRequest {
+    #[validate(email(message = &quot;Email tidak valid&quot;))]
+    pub email: String,
+
+    #[validate(length(min = 6, message = &quot;Password minimal 6 karakter&quot;))]
+    pub password: String,
+}
+</code></pre>
+<p><em>Attribute</em> <code>#[derive(Validate)]</code> memungkinkan kita melakukan validasi hanya dengan memanggil <code>payload.validate()</code> di dalam <em>handler</em> <em>login</em>.</p>
+<p>Penjelasan setiap field:</p>
+<ul>
+<li>
+<p>Memastikan format email yang dikirim oleh <em>user</em> valid.</p>
+<pre><code>#[validate(email(message = &quot;Email tidak valid&quot;))]
+pub email: String,
+</code></pre>
+</li>
+<li>
+<p>Memastikan <em>password</em> memiliki panjang minimal 6 karakter.</p>
+<pre><code>#[validate(length(min = 6, message = &quot;Password minimal 6 karakter&quot;))]
+pub password: String,
+</code></pre>
+</li>
+</ul>
+<p>Dengan validasi ini, <em>request</em> <em>login</em> yang tidak valid akan langsung ditolak sebelum diproses ke <em>database</em>.</p>
+</li>
+<li>
+<h4><a id="content-schema-userresponse" href="#content-schema-userresponse" class="heading-permalink" aria-hidden="true" title="Permalink"></a>Schema <code>UserResponse</code></h4>
+<p>Schema ini digunakan sebagai <strong>representasi data user</strong> yang akan dikirim ke <em>client</em> setelah <em>login</em> berhasil.</p>
+<pre><code>#[derive(Debug, Serialize, Deserialize)]
+pub struct UserResponse {
+    pub id: i64,
+    pub name: String,
+    pub email: String,
+}
+</code></pre>
+<p>Schema ini <strong>tidak menyertakan <em>password</em></strong>, sehingga aman untuk dikirim ke <em>frontend</em>.</p>
+</li>
+<li>
+<h4><a id="content-schema-loginresponse" href="#content-schema-loginresponse" class="heading-permalink" aria-hidden="true" title="Permalink"></a>Schema <code>LoginResponse</code></h4>
+<p>Schema ini digunakan sebagai <em>response</em> <em>login</em> berhasil.</p>
+<pre><code>#[derive(Debug, Serialize, Deserialize)]
+pub struct LoginResponse {
+    pub user: UserResponse,
+    pub token: String,
+}
+</code></pre>
+<ul>
+<li><code>user</code>
+Berisi data user yang sudah diformat menggunakan <code>UserResponse</code>.</li>
+<li><code>token</code>
+Berisi <em>token</em> <strong>JWT</strong> yang akan digunakan untuk mengakses <em>endpoint</em> yang dilindungi <em>middleware</em>.</li>
+</ul>
+<p>Dengan struktur ini, <em>response</em> <em>login</em> menjadi jelas, konsisten, dan mudah dikembangkan.</p>
+</li>
+</ul>
+<h3><a id="content-langkah-3--mendaftarkan-module-schema" href="#content-langkah-3--mendaftarkan-module-schema" class="heading-permalink" aria-hidden="true" title="Permalink"></a>Langkah 3 – Mendaftarkan Module Schema</h3>
+<p>Terakhir, silakan teman-teman buka <em>file</em> <code>src/schemas/mod.rs</code>, lalu perbarui isinya menjadi seperti berikut:</p>
+<pre><code>pub mod register_schema;
+pub mod login_schema;
+</code></pre>
+<p>Dengan ini, <em>schema</em> <em>login</em> bisa diakses dari <em>file</em> lain menggunakan <em>path</em>:</p>
+<pre><code>schemas::login_schema::LoginRequest
+</code></pre>
+<pre><code>schemas::login_schema::LoginResponse
+</code></pre>
+<p>Atau bisa juga dipanggil dengan cara:</p>
+<pre><code>schemas::login_schema::{LoginRequest, LoginResponse};
+</code></pre>
+
+                                    </div>
+
+                <!-- Div pembatas dengan content -->
+                <div class="border-t border-neutral-200 dark:border-neutral-700 mt-8 pt-6">
+                    <div class="flex justify-end">
+
+                        
+                                                    <a
+                                x-data="lessonComplete(75, '1.1.0', 'https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/lesson/completed')"
+                                href="https://santrikoding.com/account/my-courses/fullstack-developer-dengan-rust-dan-react/6010?version=1.1.0"
+                                data-id="6009"
+                                x-on:click.prevent="complete($event)"
+                                :aria-busy="loading ? 'true' : 'false'"
+                                :class="loading ? 'opacity-60 pointer-events-none' : ''"
+                                class="inline-flex items-center gap-2 px-6 py-3 bg-red-700 hover:bg-red-800 dark:bg-neutral-600 dark:hover:bg-neutral-700 text-white text-sm font-medium rounded-full transition-colors duration-200"
+                            >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-check " style="" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+    <path d="M9 12l2 2l4 -4"></path>
+ </svg>                            <span x-text="loading ? 'Processing…' : 'Complete & Continue'"></span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-narrow-right " style="" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M5 12l14 0"></path>
+    <path d="M15 16l4 -4"></path>
+    <path d="M15 8l4 4"></path>
+ </svg>                            </a>
+                        
+                        
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- Right TOC (desktop) - Hanya tampil di desktop -->
+        <aside x-cloak 
+    class="hidden xl:block fixed right-0 top-14 bottom-0 w-64 overflow-y-auto border-l border-neutral-200 dark:border-neutral-700/80 bg-white/95 dark:bg-neutral-900 backdrop-blur-sm transition-all duration-300 z-30"
+    :class="tocVisible ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'">
+    
+    <!-- Header dengan glass effect -->
+    <div class="sticky top-0 z-10 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-sm border-b border-neutral-200/50 dark:border-neutral-700/50 px-4 py-4">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="p-1.5 bg-primary/10 rounded-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-menu-3 w-4 h-4"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 6h10" /><path d="M4 12h16" /><path d="M7 12h13" /><path d="M4 18h10" /></svg>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-neutral-900 dark:text-neutral-100">On This Page</h3>
+                </div>
+            </div>
+            
+            <button @click="tocVisible = false" 
+                class="p-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-all duration-200 group"
+                title="Close table of contents">
+                <svg class="w-4 h-4 text-neutral-400 group-hover:text-neutral-600 dark:group-hover:text-neutral-300 transition-colors" 
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Progress Indicator yang benar-benar visible -->
+    <div class="px-4 py-3 border-b border-neutral-200/50 dark:border-neutral-700/50" 
+         x-data="{
+            scrollProgress: 0,
+            updateProgress() {
+                const scrollTop = window.scrollY;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                this.scrollProgress = docHeight > 0 ? Math.min((scrollTop / docHeight) * 100, 100) : 0;
+            }
+         }"
+         x-init="updateProgress(); $watch('scrollProgress', () => {}); window.addEventListener('scroll', () => updateProgress())">
+        <div class="flex items-center justify-between text-xs mb-2">
+            <span class="text-neutral-600 dark:text-neutral-400">Reading Progress</span>
+            <span class="text-primary font-medium" x-text="Math.round(scrollProgress) + '%'"></span>
+        </div>
+        
+        <!-- Progress Bar dengan warna yang kontras -->
+        <div class="w-full bg-neutral-300 dark:bg-neutral-600 rounded-full h-2 shadow-inner">
+            <div class="bg-gradient-to-r from-emerald-300 to-emerald-600 h-2 rounded-full transition-all duration-300 shadow-sm" 
+                :style="'width: ' + scrollProgress + '%'"></div>
+        </div>
+    </div>
+
+    <!-- Table of Contents Content -->
+    <nav class="p-4 space-y-1 text-sm" x-data="tableOfContents()" x-init="init()">
+        <div class="toc"></div>
+        
+        <!-- Empty State -->
+        <div x-show="!document.querySelector('.toc')?.innerHTML?.trim()" 
+            class="text-center py-6">
+            <div class="w-10 h-10 bg-neutral-100 dark:bg-neutral-800 rounded-full flex items-center justify-center mx-auto mb-2">
+                <svg class="w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+            </div>
+            <p class="text-neutral-500 dark:text-neutral-400 text-xs">No table of contents found.</p>
+        </div>
+    </nav>
+
+    <!-- Footer dengan quick actions -->
+    <div class="sticky bottom-0 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-sm border-t border-neutral-200/50 dark:border-neutral-700/50 p-3">
+        <div class="flex items-center justify-between text-xs">
+            <button @click="window.scrollTo({ top: 0, behavior: 'smooth' })"
+                class="flex items-center gap-1 px-2 py-1.5 text-neutral-600 dark:text-neutral-400 hover:text-primary dark:hover:text-primary transition-colors rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                </svg>
+                <span>Top</span>
+            </button>
+            
+            <button @click="window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })"
+                class="flex items-center gap-1 px-2 py-1.5 text-neutral-600 dark:text-neutral-400 hover:text-primary dark:hover:text-primary transition-colors rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800">
+                <span>Bottom</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+            </button>
+        </div>
+    </div>
+</aside>    </div>
+
+    <!-- Mobile TOC Panel -->
+    <!-- Overlay untuk TOC Mobile -->
+<div 
+    x-cloak 
+    x-show="mobileTocOpen"
+    x-transition.opacity.duration.300
+    class="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden"
+    @click="mobileTocOpen = false"
+></div>
+
+<!-- TOC Mobile dengan animasi slide dari kanan -->
+<div 
+    x-cloak 
+    x-show="mobileTocOpen"
+    x-transition:enter="transition-transform ease-in-out duration-500 sm:duration-300" 
+    x-transition:enter-start="transform translate-x-full" 
+    x-transition:enter-end="transform translate-x-0" 
+    x-transition:leave="transition-transform ease-in-out duration-500 sm:duration-300" 
+    x-transition:leave-start="transform translate-x-0" 
+    x-transition:leave-end="transform translate-x-full" 
+    class="md:hidden fixed top-0 bottom-0 right-0 w-80 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-sm border-l border-neutral-200 dark:border-neutral-700 overflow-y-auto z-50 rounded-l-xl shadow-2xl"
+>
+    
+    <!-- Header dengan glass effect -->
+    <div class="sticky top-0 z-10 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-sm border-b border-neutral-200/50 dark:border-neutral-700/50 px-4 py-4">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="p-1.5 bg-primary/10 rounded-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-menu-3 w-4 h-4"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 6h10" /><path d="M4 12h16" /><path d="M7 12h13" /><path d="M4 18h10" /></svg>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-neutral-900 dark:text-neutral-100">On This Page</h3>
+                    
+                </div>
+            </div>
+            
+            <button @click="mobileTocOpen = false" 
+                class="p-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-all duration-200 group"
+                title="Close table of contents">
+                <svg class="w-4 h-4 text-neutral-400 group-hover:text-neutral-600 dark:group-hover:text-neutral-300 transition-colors" 
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Progress Indicator -->
+    <div class="px-4 py-3 border-b border-neutral-200/50 dark:border-neutral-700/50" 
+         x-data="{
+            scrollProgress: 0,
+            updateProgress() {
+                const scrollTop = window.scrollY;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                this.scrollProgress = docHeight > 0 ? Math.min((scrollTop / docHeight) * 100, 100) : 0;
+            }
+         }"
+         x-init="updateProgress(); $watch('scrollProgress', () => {}); window.addEventListener('scroll', () => updateProgress())">
+        <div class="flex items-center justify-between text-xs mb-2">
+            <span class="text-neutral-600 dark:text-neutral-400">Reading Progress</span>
+            <span class="text-primary font-medium" x-text="Math.round(scrollProgress) + '%'"></span>
+        </div>
+        
+        <!-- Progress Bar dengan warna yang kontras -->
+        <div class="w-full bg-neutral-300 dark:bg-neutral-600 rounded-full h-2 shadow-inner">
+            <div class="bg-gradient-to-r from-emerald-300 to-emerald-600 h-2 rounded-full transition-all duration-300 shadow-sm" 
+                :style="'width: ' + scrollProgress + '%'"></div>
+        </div>
+    </div>
+
+    <!-- Table of Contents Content -->
+    <nav class="p-4 space-y-1 text-sm" x-data="tableOfContents()" x-init="init()">
+        <div class="toc-mobile"></div>
+        
+        <!-- Empty State -->
+        <div x-show="!document.querySelector('.toc-mobile')?.innerHTML?.trim()" 
+            class="text-center py-6">
+            <div class="w-10 h-10 bg-neutral-100 dark:bg-neutral-800 rounded-full flex items-center justify-center mx-auto mb-2">
+                <svg class="w-5 h-5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+            </div>
+            <p class="text-neutral-500 dark:text-neutral-400 text-xs">No headings available</p>
+        </div>
+    </nav>
+
+    <!-- Footer dengan quick actions -->
+    <div class="sticky bottom-0 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-sm border-t border-neutral-200/50 dark:border-neutral-700/50 p-3">
+        <div class="flex items-center justify-between text-xs">
+            <button @click="window.scrollTo({ top: 0, behavior: 'smooth' }); mobileTocOpen = false;"
+                class="flex items-center gap-1 px-2 py-1.5 text-neutral-600 dark:text-neutral-400 hover:text-primary dark:hover:text-primary transition-colors rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                </svg>
+                <span>Top</span>
+            </button>
+            
+            <button @click="window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); mobileTocOpen = false;"
+                class="flex items-center gap-1 px-2 py-1.5 text-neutral-600 dark:text-neutral-400 hover:text-primary dark:hover:text-primary transition-colors rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800">
+                <span>Bottom</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
+    <!-- store theme -->
+    <script>document.addEventListener("alpine:init",()=>{Alpine.store("theme",{isDark:!1,init(){try{const e=localStorage.getItem("sk-theme");"dark"===e?(this.isDark=!0,document.documentElement.classList.add("dark")):(this.isDark=!1,document.documentElement.classList.remove("dark"));try{const e=window.matchMedia("(prefers-color-scheme: dark)"),t=t=>{localStorage.getItem("sk-theme")||(this.isDark=t.matches,document.documentElement.classList.toggle("dark",t.matches))};e.addEventListener?e.addEventListener("change",t):e.addListener&&e.addListener(t)}catch(e){} }catch(e){console.error("theme.init error",e),this.isDark=!1,document.documentElement.classList.remove("dark")}},toggle(){try{this.isDark=!this.isDark,document.documentElement.classList.toggle("dark",this.isDark),localStorage.setItem("sk-theme",this.isDark?"dark":"light")}catch(e){console.error("theme.toggle error",e)}},setLight(){this.isDark=!1,document.documentElement.classList.remove("dark"),localStorage.setItem("sk-theme","light")},setDark(){this.isDark=!0,document.documentElement.classList.add("dark"),localStorage.setItem("sk-theme","dark")}});try{Alpine.store("theme").init()}catch(e){console.warn("Failed to auto-init theme store:",e)}});</script>
+<div 
+    x-data="searchModulesModal()" 
+    x-on:open-search-modules.window="show()"
+    x-on:keydown.escape.window="hide()"
+    x-cloak
+>
+    <!-- Backdrop -->
+    <div 
+        x-show="isOpen"
+        x-transition:enter="ease-out duration-300"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="ease-in duration-200"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-neutral-900/60 backdrop-blur-xs"
+        style="display: none;"
+    >
+        <!-- Modal Panel -->
+        <div 
+            x-show="isOpen"
+            x-transition:enter="ease-out duration-300"
+            x-transition:enter-start="opacity-0 scale-95"
+            x-transition:enter-end="opacity-100 scale-100"
+            x-transition:leave="ease-in duration-200"
+            x-transition:leave-start="opacity-100 scale-100"
+            x-transition:leave-end="opacity-0 scale-95"
+            @click.outside="hide()"
+            class="relative z-50 w-full max-w-4xl mx-auto transform transition-all"
+        >
+            <div class="bg-white border border-double border-neutral-500 dark:bg-neutral-900 dark:border-neutral-700  rounded-3xl p-1">
+                <div class="bg-white dark:bg-neutral-800 rounded-[calc(var(--radius-3xl)-(--spacing(1)))] shadow-2xl overflow-hidden border border-neutral-300 dark:border-neutral-700/50">
+                    <!-- Header -->
+                    <div class="px-6 py-3 border-b border-neutral-200/60 dark:border-neutral-700/60 bg-gradient-to-r from-white to-neutral-50 dark:from-neutral-800 dark:to-neutral-700/30 flex items-center justify-between">
+                        <h5 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100 flex items-center gap-3">
+                            <div class="p-2 bg-red-50 dark:bg-neutral-900 rounded-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-search w-5 h-5 text-red-600 dark:text-neutral-400" style="" viewBox="0 0 16 16">
+    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+</svg>                            </div>
+                            <span>Search Modules</span>
+                        </h5>
+                        <button 
+                            type="button" 
+                            @click="hide()" 
+                            class="text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 transition-all duration-200 p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 transform hover:scale-110"
+                        >
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Body -->
+                    <div class="p-6">
+                        <!-- Search Input -->
+                        <div class="relative">
+                            <input 
+                                type="text" 
+                                x-model="keyword"
+                                @input.debounce.500ms="performSearch()"
+                                @keydown.enter="performSearch()"
+                                x-ref="searchInput"
+                                placeholder="Search modules here..."
+                                class="w-full px-4 py-2 text-lg border border-neutral-200 dark:border-neutral-600 rounded-xl outline-none dark:bg-neutral-700 dark:text-white transition-all duration-200"
+                                :class="{ 'border-red-300': showMinCharError }"
+                            >
+                            <div x-show="showMinCharError" class="absolute bottom-0 left-0 transform translate-y-full mt-1 text-red-500 text-sm">
+                                Please enter at least 3 characters
+                            </div>
+                        </div>
+
+                        <!-- Results Container -->
+                        <div x-show="hasResults || isLoading" class="mt-4 max-h-96 overflow-y-auto">
+                            <!-- Loading State -->
+                            <div x-show="isLoading" class="text-center py-8">
+                                <div class="w-12 h-12 border-4 border-red-500 border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
+                                <p class="text-neutral-600 dark:text-neutral-400 text-sm">Searching modules...</p>
+                            </div>
+
+                            <!-- Results -->
+                            <!-- Results -->
+                            <div x-show="!isLoading && hasResults" class="space-y-3">
+                                <template x-for="lesson in results" :key="lesson.lesson_id">
+                                    <a 
+                                        :href="getLessonUrl(lesson)"
+                                        @click="hide()"
+                                        class="block p-4 rounded-xl border border-neutral-200 dark:border-neutral-700 hover:border-red-300 dark:hover:border-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all duration-200 group"
+                                    >
+                                        <div class="flex items-start gap-3">
+                                            <!-- Icon based on where the keyword was found -->
+                                            <div class="flex-shrink-0 mt-1">
+                                                <div x-show="lesson.lesson.found_in_title" 
+                                                    class="p-2 bg-blue-50 dark:bg-blue-900/30 rounded-lg">
+                                                    <svg class="w-4 h-4 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" />
+                                                    </svg>
+                                                </div>
+                                                <div x-show="lesson.lesson.found_in_content && !lesson.lesson.found_in_title" 
+                                                    class="p-2 bg-green-50 dark:bg-green-900/30 rounded-lg">
+                                                    <svg class="w-4 h-4 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="flex-1 min-w-0">
+                                                <!-- Title with highlighted keyword -->
+                                                <h3 class="text-sm font-medium text-neutral-900 dark:text-neutral-100 group-hover:text-red-700 dark:group-hover:text-red-300 transition-colors mb-1"
+                                                    x-html="lesson.lesson.title_highlighted || lesson.lesson.title"></h3>
+                                                
+                                                <!-- Content snippet with highlighted keyword -->
+                                                <div x-show="lesson.lesson.content_snippet" 
+                                                    class="text-xs text-neutral-600 dark:text-neutral-400 mt-1">
+                                                    <span x-html="lesson.lesson.content_snippet"></span>
+                                                </div>
+                                                
+                                                <!-- Badges showing where keyword was found -->
+                                                <div class="flex items-center gap-2 mt-2">
+                                                    <span x-show="lesson.lesson.found_in_title" 
+                                                        class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+                                                        <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" />
+                                                        </svg>
+                                                        In Title
+                                                    </span>
+                                                    <span x-show="lesson.lesson.found_in_content" 
+                                                        class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
+                                                        <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                                        </svg>
+                                                        In Content
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </template>
+                            </div>
+
+                            <!-- No Results -->
+                            <div x-show="!isLoading && results.length === 0 && keyword.length >= 3" 
+                                class="text-center py-8">
+                                <div class="w-16 h-16 bg-neutral-100 dark:bg-neutral-700 rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search text-neutral-400" width="24" height="24" style="" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="color: #6e777e !important;">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path>
+    <path d="M21 21l-6 -6"></path>
+</svg>                                </div>
+                                <p class="text-neutral-600 dark:text-neutral-400 text-sm">No modules found for "<span x-text="keyword" class="font-medium"></span>"</p>
+                                <p class="text-neutral-500 dark:text-neutral-500 text-xs mt-1">Try different keywords</p>
+                            </div>
+                        </div>
+
+                        <!-- Initial State -->
+                        <div x-show="!hasResults && !isLoading && keyword.length < 3" class="text-center py-8">
+                            <div class="w-16 h-16 bg-neutral-100 dark:bg-neutral-700 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-search text-neutral-400" style="" viewBox="0 0 16 16">
+    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+</svg>                            </div>
+                            <p class="text-neutral-600 dark:text-neutral-400 text-sm">Enter keywords to search modules</p>
+                        </div>
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="px-6 py-4 border-t border-neutral-200/60 dark:border-neutral-700/60 bg-neutral-50/50 dark:bg-neutral-800/30 text-center">
+                        <p class="text-xs text-neutral-500 dark:text-neutral-400">
+                            Search through all course modules • Minimum 3 characters
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>function searchModulesModal(){return{isOpen:!1,isLoading:!1,keyword:'',results:[],courseId:75,courseVersion:'1.1.0',get showMinCharError(){return this.keyword.length>0&&this.keyword.length<3},get hasResults(){return this.results&&this.results.length>0},init(){this.$watch('isOpen',e=>{e&&this.$nextTick(()=>{this.$refs.searchInput.focus()})})},show(){this.isOpen=!0},hide(){this.isOpen=!1,setTimeout(()=>{this.keyword='',this.isLoading=!1,this.results=[]},300)},async performSearch(){if(this.keyword.length<3)return void(this.results=[]);this.isLoading=!0,console.log('Searching modules for:',this.keyword);try{const e=await fetch("https://santrikoding.com/account/my-courses/search",{method:'POST',headers:{'Content-Type':'application/json','X-CSRF-TOKEN':'qOlciVmrPkHyYuwtV7NGXCZoCK2uqmRIGIC8xvjC','Accept':'application/json'},body:JSON.stringify({course_id:this.courseId,course_version:this.courseVersion,keyword:this.keyword})});if(!e.ok)throw new Error(`HTTP error! status: ${e.status}`);const t=await e.json();console.log('Modules search response:',t),this.results=t||[]}catch(e){console.error('Error searching modules:',e),this.results=[]}finally{this.isLoading=!1}},getLessonUrl(e){return`/account/my-courses/fullstack-developer-dengan-rust-dan-react/${e.lesson_id}?version=1.1.0`}}}document.addEventListener('keydown',function(e){(e.ctrlKey||e.metaKey)&&e.shiftKey&&'k'===e.key&&(e.preventDefault(),window.dispatchEvent(new CustomEvent('open-search-modules')))}),document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('[data-open-search-modules]').forEach(e=>{e.addEventListener('click',function(){window.dispatchEvent(new CustomEvent('open-search-modules'))})})});</script>
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+<script>
+window.SantriKodingApp=function(){return{darkMode:!1,sidebarOpen:!1,mobileTocOpen:!1,tocVisible:localStorage.getItem("tocVisible")!=="false",suppressTocSave:!1,init(){this.initializeTheme(),this.initializeToc(),this.initializeScrollPrevention(),this.initializeCodeAndImages()},initializeTheme(){const e=Alpine.store?.("theme");e?(this.darkMode=Boolean(e.isDark),this.syncDarkModeClass(),this.$watch&&this.$watch(()=>Alpine.store("theme").isDark,e=>{this.darkMode=Boolean(e)})):(this.darkMode=localStorage.getItem("sk-theme")==="dark",this.syncDarkModeClass()),this.$watch&&this.$watch("darkMode",e=>{this.handleDarkModeChange(e)})},syncDarkModeClass(){document.documentElement.classList.toggle("dark",this.darkMode)},handleDarkModeChange(e){const t=Boolean(e);if(Alpine.store?.("theme")){const s=Alpine.store("theme");s.isDark!==t&&(s.isDark=t,this.syncDarkModeClass(),localStorage.setItem("sk-theme",t?"dark":"light"))}else this.syncDarkModeClass(),localStorage.setItem("sk-theme",t?"dark":"light")},initializeToc(){const e=window.matchMedia("(max-width: 1023px)").matches;e&&(this.suppressTocSave=!0,this.tocVisible=!1,setTimeout(()=>{this.suppressTocSave=!1},300)),this.updateTocVisibility(),this.setupMediaQueryListener(),this.$watch&&this.$watch("tocVisible",e=>{this.suppressTocSave||localStorage.setItem("tocVisible",e),this.updateTocVisibility()})},setupMediaQueryListener(){const e=window.matchMedia("(max-width: 1023px)"),t=s=>{if(s.matches)this.suppressTocSave=!0,this.tocVisible=!1,setTimeout(()=>{this.suppressTocSave=!1},300);else{const i=localStorage.getItem("tocVisible");this.tocVisible=i===null||i!=="false"}this.updateTocVisibility()};e.addEventListener?e.addEventListener("change",t):e.addListener&&e.addListener(t)},initializeScrollPrevention(){this.$watch&&(this.$watch("sidebarOpen",e=>{this.toggleBodyScroll(e)}),this.$watch("mobileTocOpen",e=>{this.toggleBodyScroll(e)}))},toggleBodyScroll(e){e&&window.innerWidth<1024?document.body.style.overflow="hidden":document.body.style.overflow=""},toggleTheme(){Alpine.store?.("theme")&&typeof Alpine.store("theme").toggle=="function"?Alpine.store("theme").toggle():this.darkMode=!this.darkMode},updateTocVisibility(){const e=document.querySelector("main"),t=document.querySelector('aside[class*="xl:block"]');e&&(this.tocVisible?(e.classList.remove("xl:mr-0"),e.classList.add("xl:mr-64"),t?.classList.remove("hidden")):(e.classList.remove("xl:mr-64"),e.classList.add("xl:mr-0"),t?.classList.add("hidden")))},setTocVisible(e,t=!0){t?this.tocVisible=e:(this.suppressTocSave=!0,this.tocVisible=e,setTimeout(()=>{this.suppressTocSave=!1},300))},initializeCodeAndImages(){["DOMContentLoaded","turbo:load","turbo:render","turbo:frame-render"].forEach(e=>{document.addEventListener(e,()=>{this.highlightCodeBlocks(),this.makeImagesResponsive(),this.initializeCopyButtons(),this.initializeImageZoom()})}),document.addEventListener("turbo:before-cache",()=>{this.cleanupCodeAndImages()})},highlightCodeBlocks(){try{if(typeof hljs!="undefined"){hljs.configure({ignoreUnescapedHTML:!0,cssSelector:"pre code"}),document.querySelectorAll("pre code").forEach(e=>{e.classList.remove("hljs")}),hljs.highlightAll(),setTimeout(()=>this.initializeCopyButtons(),100)}}catch(e){console.warn("hljs init error",e)}},makeImagesResponsive(){[".card-body p img",".prose img"].forEach(e=>{document.querySelectorAll(e).forEach(t=>{t.classList.contains("no-responsive")||(t.style.width="100%",t.style.height="auto",t.classList.add("responsive-image"))})})},initializeCopyButtons(){document.querySelectorAll(".copy-code-btn").forEach(e=>e.remove()),document.querySelectorAll("pre").forEach(e=>{if(!e.querySelector(".copy-code-btn")){e.style.position="relative",e.style.paddingTop="2.5rem";const t=document.createElement("button");t.className="copy-code-btn absolute top-3 right-3 flex items-center px-3 py-1.5 text-xs bg-neutral-800 border border-neutral-700 rounded-lg text-neutral-400 hover:text-neutral-200 dark:hover:bg-neutral-700 transition-all duration-200 shadow-sm z-10",t.innerHTML='<svg class="copy-icon w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg><svg class="check-icon w-4 h-4 text-green-500 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="copy-text"></span>',t.addEventListener("click",async function(){const s=e.querySelector("code").innerText,i=this.querySelector(".copy-text"),n=this.querySelector(".copy-icon"),o=this.querySelector(".check-icon");try{await navigator.clipboard.writeText(s),i.textContent="Copied!",n.classList.add("hidden"),o.classList.remove("hidden"),this.classList.add("bg-green-50","dark:bg-green-900/20","border-green-200","dark:border-green-800"),setTimeout(()=>{i.textContent="",n.classList.remove("hidden"),o.classList.add("hidden"),this.classList.remove("bg-green-50","dark:bg-green-900/20","border-green-200","dark:border-green-800")},2e3)}catch(a){console.error("Failed to copy: ",a);const r=document.createElement("textarea");r.value=s,document.body.appendChild(r),r.select(),document.execCommand("copy"),document.body.removeChild(r),i.textContent="Copied!",n.classList.add("hidden"),o.classList.remove("hidden"),this.classList.add("bg-green-50","dark:bg-green-900/20","border-green-200","dark:border-green-800"),setTimeout(()=>{i.textContent="",n.classList.remove("hidden"),o.classList.add("hidden"),this.classList.remove("bg-green-50","dark:bg-green-900/20","border-green-200","dark:border-green-800")},2e3)}}),e.appendChild(t)}})},initializeImageZoom(){document.querySelectorAll(".image-zoom-overlay").forEach(e=>e.remove()),document.querySelectorAll(".prose img").forEach(e=>{if(!e.classList.contains("no-zoom")&&!e.dataset.zoomInitialized){e.dataset.zoomInitialized="1",e.style.cursor="zoom-in",e.addEventListener("click",function(s){s.preventDefault(),s.stopPropagation();const i=document.createElement("div");i.className="image-zoom-overlay fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4",i.style.cursor="zoom-out",i.style.opacity="0",i.style.transition="opacity 0.3s ease-out",i.style.display="flex",i.style.pointerEvents="auto";const n=document.createElement("div");n.className="relative";const o=document.createElement("img");o.src=this.src,o.alt=this.alt||"Zoomed image",o.className="max-w-[90vw] max-h-[85vh] object-contain rounded-lg shadow-2xl",o.style.transform="scale(1)",o.style.cursor="default",o.style.pointerEvents="auto";const a=document.createElement("button");a.className="absolute -top-12 right-0 p-2 bg-white dark:text-neutral-800 p-2 rounded-full transition-colors duration-200 z-60",a.setAttribute("aria-label","Close image preview"),a.innerHTML='<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>';const r=()=>{document.removeEventListener("keydown",c),i.style.opacity="0",setTimeout(()=>{document.body.contains(i)&&(document.body.removeChild(i),document.body.style.overflow="")},300)},c=t=>{(t.key==="Escape"||t.key==="Esc")&&r()};a.addEventListener("click",function(t){t.stopPropagation(),r()}),i.addEventListener("click",function(t){t.target===i&&r()}),document.addEventListener("keydown",c),document.body.style.overflow="hidden",n.appendChild(o),n.appendChild(a),i.appendChild(n),document.body.appendChild(i),i.getBoundingClientRect(),i.style.opacity="1"},{passive:!1})}})},cleanupCodeAndImages(){document.querySelectorAll(".copy-code-btn").forEach(e=>e.remove()),document.querySelectorAll(".image-zoom-overlay").forEach(e=>e.remove()),document.querySelectorAll("pre").forEach(e=>{e.style.paddingTop=""}),document.querySelectorAll(".prose img").forEach(e=>{delete e.dataset.zoomInitialized})}}};
+</script>
+<script>
+window.tableOfContents=function(){return{activeId:"",headings:[],tocLinks:[],init(){this.deferredSetup(),this.bindTurboEvents()},deferredSetup(){this.$nextTick(()=>{this.setupTableOfContents()})},bindTurboEvents(){["turbo:load","turbo:render"].forEach(e=>{document.addEventListener(e,()=>{this.deferredSetup()})})},setupTableOfContents(){this.headings=Array.from(document.querySelectorAll("h2 a[id], h3 a[id], h4 a[id], h5 a[id], h6 a[id]")),this.tocLinks=Array.from(document.querySelectorAll(".toc a, .toc-mobile a")),this.bindScrollEvent(),this.bindTocClickEvents(),this.updateActiveLink()},bindScrollEvent(){window.addEventListener("scroll",()=>{this.updateActiveLink()})},bindTocClickEvents(){this.tocLinks.forEach(e=>{e.removeEventListener("click",this.handleTocClick),e.addEventListener("click",t=>{t.preventDefault(),this.handleTocClick(t.target)})})},updateActiveLink(){const e=window.scrollY+200;let t="";this.headings.forEach(s=>{s.offsetTop<=e&&(t=s.id)}),t!==this.activeId&&(this.activeId=t,this.updateTocLinkStates())},updateTocLinkStates(){this.tocLinks.forEach(e=>e.classList.remove("active")),this.activeId&&document.querySelectorAll('.toc a[href="#'+this.activeId+'"], .toc-mobile a[href="#'+this.activeId+'"]').forEach(e=>e.classList.add("active"))},handleTocClick(e){const t=e.getAttribute("href").substring(1),s=document.querySelector('a[id="'+t+'"]');s&&(window.history.pushState(null,"","#"+t),s.scrollIntoView({behavior:"smooth",block:"start"}),setTimeout(()=>this.updateActiveLink(),300))}}};
+</script>
+<script>
+window.lessonComplete=function(e,t,s){return{loading:!1,error:null,courseId:e,courseVersion:t,postUrl:s,async complete(i){i&&i.preventDefault&&i.preventDefault();const n=i.currentTarget||i.target,o=n.getAttribute("data-id"),a=n.getAttribute("href")||n.dataset.next;if(!o)return void console.warn("lesson id missing");this.loading=!0,this.error=null;try{const r=document.querySelector("meta[name='csrf-token']"),c=r?r.getAttribute("content"):null,d=new FormData;c&&d.append("_token",c),d.append("course_id",this.courseId),d.append("course_version",this.courseVersion),d.append("lesson_id",o);const l=await fetch(this.postUrl,{method:"POST",body:d,credentials:"same-origin",headers:{Accept:"application/json"}});if(!l.ok){const u=await l.text();throw new Error("Request failed: "+l.status+" "+u)}typeof Turbo!="undefined"&&Turbo.visit?Turbo.visit(a):window.location.href=a}catch(u){console.error("Mark lesson completed error:",u),this.error=u.message||String(u)}this.loading=!1}}};
+</script>
+<script>
+(function(){'use strict';function a(){document.querySelectorAll('.code-group').forEach(function(b){b.querySelectorAll('.code-tab-btn').forEach(function(c){c.addEventListener('click',function(){var d=this.getAttribute('data-tab'),e=this.closest('.code-group');e.querySelectorAll('.code-tab-btn').forEach(function(f){f.classList.remove('active')});e.querySelectorAll('.code-tab-content').forEach(function(f){f.classList.remove('active')});this.classList.add('active');var g=document.getElementById(d);g&&g.classList.add('active')})})})}document.readyState==='loading'?document.addEventListener('DOMContentLoaded',a):a();document.addEventListener('livewire:load',a);document.addEventListener('turbo:load',a)})();
+</script>
+                        <script>document.addEventListener('contextmenu', event => event.preventDefault());</script>            <script>document.addEventListener("keydown",e=>{if((e.ctrlKey&&e.shiftKey&&["C","I","J"].includes(e.key))||"F12"===e.key)e.preventDefault()});</script>
+<script>document.addEventListener('keydown', function (e) {if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'c') {e.preventDefault();}});</script>            <script>document.body.style.userSelect = "none";document.body.style.webkitUserSelect = "none";document.body.style.MozUserSelect = "none";document.body.style.msUserSelect = "none";</script>
+            <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"fc3b12d6075243b988996dc1535bb60c","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
