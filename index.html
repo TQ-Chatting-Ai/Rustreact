@@ -1,0 +1,172 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Directory listing for /</title>
+<style>
+    /* Reset dasar agar tampilan konsisten */
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        background-color: #f0f2f5;
+        color: #333;
+        padding: 20px;
+        line-height: 1.6;
+    }
+
+    /* Container utama agar tidak terlalu lebar di layar besar */
+    .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        overflow: hidden; /* Agar border-radius tidak terpotong */
+    }
+
+    /* Styling Header */
+    h1 {
+        background-color: #2c3e50;
+        color: white;
+        padding: 20px;
+        font-size: 1.25rem;
+        text-align: center;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+    }
+
+    /* Menghilangkan garis HR default dan menggantinya dengan border header */
+    hr {
+        display: none;
+    }
+
+    /* Styling List */
+    ul {
+        list-style: none;
+    }
+
+    li {
+        border-bottom: 1px solid #eee;
+    }
+
+    li:last-child {
+        border-bottom: none;
+    }
+
+    /* Styling Link */
+    a {
+        display: flex;
+        align-items: center;
+        padding: 15px 20px;
+        text-decoration: none;
+        color: #4a5568;
+        font-size: 0.95rem;
+        transition: all 0.2s ease;
+        font-family: 'Consolas', 'Monaco', monospace; /* Font monospace untuk nama file agar rapi */
+    }
+
+    /* Efek Hover (Saat disentuh/diarahkan mouse) */
+    a:hover {
+        background-color: #f8fafc;
+        color: #3182ce;
+        padding-left: 28px; /* Efek geser sedikit */
+    }
+
+    /* Menambahkan ikon Folder untuk .git */
+    a[href^=".git"]::before {
+        content: "📂";
+        margin-right: 12px;
+        font-size: 1.2em;
+    }
+
+    /* Menambahkan ikon File untuk file html */
+    a:not([href^=".git"])::before {
+        content: "📄";
+        margin-right: 12px;
+        font-size: 1.2em;
+        opacity: 0.7;
+    }
+
+    /* Footer kecil (opsional, untuk menutup bagian bawah list) */
+    .footer-note {
+        padding: 10px;
+        text-align: center;
+        font-size: 0.8rem;
+        color: #aaa;
+        background: #fafafa;
+    }
+
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Rust + React Programming</h1>
+    
+    <ul>
+        <li><a href="1_tentang.html">Tentang</a></li>
+        <li><a href="2_prasyaratBE.html">Prasyarat Backend</a></li>
+        <li><a href="3_prasyaratFE.html">Prasyarat ront End</a></li>
+        <li><a href="4_instalasi.html">Instalasi</a></li>
+        <li><a href="5_first_project.html">Mulai Projeect</a></li>
+        <li><a href="6_live_reaload.html">Live Reaload</a></li>
+        <li><a href="7_dependency.html">Install Dependency</a></li>
+        <li><a href="8_file_env.html">File .env</a></li>
+        <li><a href="9_database.html">Database</a></li>
+        <li><a href="a_model_migration.html">Model and Migration</a></li>
+        <li><a href="ab_JWT.html">JWT</a></li>
+        <li><a href="ac_helperJWT.html">Helper JWT</a></li>
+        <li><a href="ad_API_response.html">API response</a></li>
+        <li><a href="ae_middleware_JWT.html">middleware JWT</a></li>
+        <li><a href="aea_schema_register.html">Schema Register</a></li>
+        <li><a href="aeb_restfulAPI_register.html">restfulAPI_register</a></li>
+        <li><a href="aec_schema_login.html">schema_login</a></li>
+        <li><a href="aed_restfulAPI_login.html">restfulAPI_login</a></li>
+        <li><a href="af_restfulAPI_getData.html">restfulAPI_getData</a></li>
+        <li><a href="ag_schemaUser_storeRequest.html">schemaUser_storeRequest</a></li>
+        <li><a href="ah_restfulAPI_getInsert.html">restfulAPI_getInsert</a></li>
+        <li><a href="ai_restfulAPI_getDataByID.html">restfulAPI_getDataByID</a></li>
+        <li><a href="aj_schemaUser_UpdateRequest.html">schemaUser_UpdateRequest</a></li>
+        <li><a href="ak_restfulAPI_updateDataUser.html">restfulAPI_updateDataUser</a></li>
+        <li><a href="al_restfulAPI_deletaDataUser.html">restfulAPI_deletaDataUser</a></li>
+        <li><a href="am_CORS.html">CORS</a></li>
+        <li><a href="an_firstReactProject.html">firstReactProject</a></li>
+        <li><a href="ao_library_pendukung.html">library_pendukung</a></li>
+        <li><a href="ap_Endpoint_API.html">Endpoint_API</a></li>
+        <li><a href="aq_boostrap.html">boostrap</a></li>
+        <li><a href="ar_tanstackQuery.html">tanstackQuery</a></li>
+        <li><a href="as_tanstackQuery_Conf.html">tanstackQuery_Conf</a></li>
+        <li><a href="at_authentification.html">authentification</a></li>
+        <li><a href="au_customHook_register.html">customHook_register</a></li>
+        <li><a href="av_customHook_login.html">customHook_login</a></li>
+        <li><a href="aw_customHook_authUser.html">customHook_authUser</a></li>
+        <li><a href="ax_customHook_logout.html">customHook_logout</a></li>
+        <li><a href="ay_viewRoute_auth.html">viewRoute_auth</a></li>
+        <li><a href="az_process_regist.html">process_regist</a></li>
+        <li><a href="b_process_login.html">rocess_login</a></li>
+        <li><a href="ba_vieRout_dashboard.html">vieRout_dashboard</a></li>
+        <li><a href="bb_user_dashboard.html">user_dashboard</a></li>
+        <li><a href="bc_process_logout.html">process_logout</a></li>
+        <li><a href="bd_customHookUser.html">customHookUser</a></li>
+        <li><a href="be_customHookUser_create.html">customHookUser_create</a></li>
+        <li><a href="bf_customHookUser_byID.html">customHookUser_byID</a></li>
+        <li><a href="bg_customHookUser_update.html">customHookUser_update</a></li>
+        <li><a href="bh_customHookUser_delete.html">customHookUser_delete</a></li>
+        <li><a href="bi_list_dataUser.html">list_dataUser</a></li>
+        <li><a href="bj_create_dataUser.html">create_dataUser</a></li>
+        <li><a href="bk_edit_dataUser.html">edit_dataUser</a></li>
+        <li><a href="bl_delete_dataUser.html">delete_dataUser</a></li>
+        <li><a href="bm_penutup.html">penutup</a></li>
+    </ul>
+    
+    <div class="footer-note">End of directory</div>
+</div>
+
+</body>
+</html>
